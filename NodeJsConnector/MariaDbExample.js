@@ -19,7 +19,7 @@ function createMariaDbConnection() {
 		host: 'localhost',
 		user: text[0],
 		password: text[1],
-		database: 'anc87872',
+		database: text[0],
 		port: 3306
 	});
 }
@@ -30,7 +30,7 @@ async function asyncFunction() {
 	try {
 		conn = await pool.getConnection();
 		const rows = await conn.query("SELECT * from student");
-		console.log(rows);
+		console.log(JSON.stringify(rows));
 		// const res = await conn.query("INSERT INTO myTable value (?, ?)", [1, "mariadb"]);
 		// console.log(res); // { affectedRows: 1, insertId: 1, warningStatus: 0 }
 	} catch (err) {
