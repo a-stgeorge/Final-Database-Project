@@ -1,0 +1,16 @@
+body {
+    background-color: beige;
+}
+
+input {
+    width: 500px;
+}
+
+#result {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+}
+
+td, th {
+    padding: 2px;
+}
