@@ -16,6 +16,7 @@ module.exports = {
             host: 'localhost',
             user: text[0],
             password: text[1],
+            //TODO change this to final project database when ready
             database: text[0],
             port: 3306
         });

@@ -1,42 +1,5 @@
-window.onload = () => {
-    document.getElementById('button').onclick = click2;
-}
-
-async function click() {
-    fetch('boi').then(async response => {
-        let responseJson = await response.json();
-        document.getElementById('result').innerHTML = '';
-        constructTable('#result', responseJson);
-        // let resultDiv = document.getElementById('result');
-        // for(let i = 0; i < responseJson.length; i++) {
-        //     let newP = document.createElement('p');
-        //     newP.innerHTML = JSON.stringify(responseJson[i]);
-        //     resultDiv.appendChild(newP);
-        // }
-    });
-}
-
-async function click2() {
-    let data = {
-        query: document.getElementById('query').value
-    };
-    fetch('test', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    }
-    ).then(async response => {
-        let responseJson = await response.json();
-        document.getElementById('result').innerHTML = '';
-        constructTable('#result', responseJson);
-    });
-};
-
 //Credit: GeeksForGeeks
 function constructTable(selector, list) { 
-      
     // Getting the all column names 
     var cols = Headers(list, selector);   
 
@@ -56,7 +19,7 @@ function constructTable(selector, list) {
         // Adding each row to the table 
         $(selector).append(row); 
     } 
-} 
+}
 //Credit: GeeksForGeeks
 function Headers(list, selector) { 
     var columns = []; 
