@@ -11,8 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\NodeJsConnector\\app.js",
-            "cwd": "${workspaceFolder}\\NodeJsConnector"
+            "program": "${workspaceFolder}\\Echidna\\app.js",
+            "cwd": "${workspaceFolder}\\Echidna"
         }
     ]
 }
