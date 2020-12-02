@@ -2,6 +2,7 @@ const express = require('express');
 const router = require('express').Router();
 router.use(express.static('../public'));
 
+const fs = require('fs');
 const db = require('../database');
 let connection;
 
@@ -12,9 +13,10 @@ async function checkConnection(req, res, next) {
 			connection = await db.makeMariaDbPool();
 		}
 	} catch (err) {
-		res.send(`<h1>${err}</h1>
-			<p>Perhaps your ssh tunnel is not working</p>`
+		res.status(400).send(`<h1>${err}</h1>
+			<p>Perhaps your ssh tunnel is not working (or credentials.txt is the wrong format)</p>`
 		);
+		next('Tunnel or credentials issue');
 	}
 	next();
 }
@@ -25,6 +27,16 @@ router.use(checkConnection);
 //	to something more helpful
 
 const makeQuery = require('../query');
+
+router.post('/timeWarp/:timeWarpNum', async function (req, res) {
+	let timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase${req.params.timeWarpNum}.txt`, 'utf8');
+	try {
+		let answer = await makeQuery(connection, timeWarpString);
+		res.status(200).send(answer);
+	} catch (err) {
+		res.status(400).send(err);
+	}
+});
 
 router.post('/page1', async function (req, res) {
 	try {

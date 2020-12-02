@@ -18,7 +18,8 @@ module.exports = {
             password: text[1],
             //TODO change this to final project database when ready
             database: text[0],
-            port: 3306
+            port: 3306,
+            multipleStatements: true
         });
         try {
             let conn = await pool.getConnection();

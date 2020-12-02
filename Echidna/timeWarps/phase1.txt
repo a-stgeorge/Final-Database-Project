@@ -1,0 +1,67 @@
+drop table if exists teaches;
+drop table if exists course_offering;
+drop table if exists course;
+drop table if exists instructor;
+drop table if exists mod_table;
+
+SET storage_engine=InnoDB;
+
+create table course
+    (course_id        varchar(6) not null, 
+     title            varchar(50) not null, 
+     dept_name        varchar(20),
+    num_credits        decimal(2,1) not null check (num_credits >= 0),
+    cluster_id        integer,
+     primary key (course_id)
+    );
+
+create index course_credits on course(course_id, num_credits);
+
+create table instructor
+    (instructor_id            decimal(8,0) check (instructor_id >= 0), 
+     first_name            varchar(50) not null, 
+ last_name            varchar(50) not null, 
+ email             varchar(60) not null,
+     dept_name        varchar(20) not null, 
+    desired_load_min        decimal(3,1) not null check (desired_load_min >= 0),
+    desired_load_max        decimal(3,1) not null check (desired_load_max >= desired_load_min),
+     primary key (instructor_id)
+    );
+create table course_offering 
+
+(course_id             varchar(6) not null, 
+course_type             varchar(50) not null, 
+semester             enum('fall','interim','spring', 'summer'), 
+year                 decimal(4,0) not null check (year >= 1776), 
+section_num             integer check (section_num >= 0), 
+num_credits             decimal(2,1) not null, 
+TEU_value             decimal(3,1) check (TEU_value>=0),
+ 
+primary key (course_id, course_type, semester, year, section_num), 
+foreign key(course_id, num_credits) references course(course_id, num_credits));
+
+create table mod_table
+    (mod_name        varchar(3) not null,
+    start_time        time(0),
+end_time        time(0),
+mod_credits        decimal(1, 0) check (mod_credits >= 3 and mod_credits <= 4),
+days_of_week        varchar(5),
+primary key (mod_name, mod_credits)
+);
+
+create table teaches 
+
+(instructor_id             decimal(8,0) check (instructor_id >= 0), 
+course_id             varchar(6) not null, 
+course_type             varchar(50) not null, 
+semester             enum('fall','interim','spring', 'summer'), 
+year                 decimal (4,0) check (year >= 1776), 
+section_num             integer, 
+mod_name             varchar(3), 
+mod_credits             decimal(1, 0) check (mod_credits >= 3 and mod_credits <= 4), 
+
+primary key(instructor_id, course_id, course_type, semester, year, section_num), 
+foreign key fk1 (course_id, course_type, semester, year, section_num) 
+references course_offering (course_id, course_type, semester, year, section_num) on update cascade on delete cascade, 
+foreign key fk2 (instructor_id) references instructor (instructor_id) on update cascade on delete cascade, 
+foreign key fk3  (mod_name, mod_credits) references mod_table (mod_name, mod_credits) on update cascade on delete set null);
