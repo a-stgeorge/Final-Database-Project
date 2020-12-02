@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add course sections</title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
+        <link rel="icon" type="image/jpg" href="../echidna.jpg"/>
+        <script src="../js/table.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <script src="../js/page1.js"></script>
+    </head>
+    <body>
+        <button onclick="window.location.href='/'">
+            Home
+        </button>
+        <br/>
+        <button type="button" id='button'>Get all students</button>
+
+        <form>
+            <label for="course_id">Course ID:</label><input type="text" id="course_id"><br/>
+
+            <!-- TODO add text box for non instructional load selection -->
+            <label for="course_type">Course type:</label> 
+            <select id="course_type">
+                <option value="in_person">In person</option>
+                <option value="web">Web</option>
+                <option value="nonil">Non-instructional Load</option>
+            </select><br/>
+
+            <label for="semester">Semester:</label>
+            <select id="semester">
+                <option value="fall">Fall</option>
+                <option value="interim">Interim</option>
+                <option value="spring">Spring</option>
+                <option value="summer">Summer</option>
+            </select><br/>
+
+            <label for="year">Year:</label>                 <input type="text" id="year"><br/>
+            <label for="sec_number">Section number:</label> <input type="text" id="sec_number"><br/>
+            <label for="num_credits">Number credits:</label><input type="text" id="num_credits"><br/>
+            <label for="teu">TEU value:</label>             <input type="text" id="teu"><br/>
+
+        </form>
+
+        <div id="result"></div>
+    </body>
+</html>

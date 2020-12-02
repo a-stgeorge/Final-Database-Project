@@ -45,4 +45,55 @@ router.post('/page2', async function (req, res) {
 	}
 });
 
+router.post('/page3', async function (req, res) {
+	let body = req.body;
+	try {
+		let answer = await makeQuery(connection, body.query);
+		res.status(200).send(answer);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+});
+
+router.post('/page4', async function (req, res) {
+	let body = req.body;
+	try {
+		let answer = await makeQuery(connection, body.query);
+		res.status(200).send(answer);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+});
+
+router.post('/page5', async function (req, res) {
+	let body = req.body;
+	try {
+		let answer = await makeQuery(connection, 'select course_id, title, dept_name from course');
+		res.status(200).send(answer);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+});
+
+router.post('/page6', async function (req, res) {
+	let body = req.body;
+	try {
+		let answer = await makeQuery(connection, body.query);
+		res.status(200).send(answer);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+});
+
+router.post('/page7', async function (req, res) {
+	let body = req.body;
+	try {
+		let answer = await makeQuery(connection, body.query);
+		res.status(200).send(answer);
+	} catch (err) {
+		res.status(400).send(err.message);
+	}
+});
+
+
 module.exports = router;
