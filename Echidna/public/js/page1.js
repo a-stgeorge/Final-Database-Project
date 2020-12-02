@@ -1,6 +1,6 @@
 window.onload = () => {
     document.getElementById('button').onclick = click;
-    console.log('Page 2 boi');
+    console.log('Page 1 boi');
 }
 
 async function click() {
