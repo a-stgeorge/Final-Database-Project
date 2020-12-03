@@ -17,7 +17,7 @@ app.get('/', async function (req, res) {
 });
 
 /** TODO LIST:
- * 
+ * - In database.js remember to use the 'Echidna' database when ready!
  */
 
 const server = app.listen(port, function() {

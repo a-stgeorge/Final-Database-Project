@@ -29,8 +29,8 @@ router.use(checkConnection);
 const makeQuery = require('../query');
 
 router.post('/timeWarp/:timeWarpNum', async function (req, res) {
-	let timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase${req.params.timeWarpNum}.txt`, 'utf8');
 	try {
+		let timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase${req.params.timeWarpNum}.txt`, 'utf8');
 		let answer = await makeQuery(connection, timeWarpString);
 		res.status(200).send(answer);
 	} catch (err) {

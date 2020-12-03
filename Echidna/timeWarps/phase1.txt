@@ -18,15 +18,15 @@ create table course
 create index course_credits on course(course_id, num_credits);
 
 create table instructor
-    (instructor_id            decimal(8,0) check (instructor_id >= 0), 
-     first_name            varchar(50) not null, 
+(instructor_id            decimal(8,0) check (instructor_id >= 0), 
+    first_name            varchar(50) not null, 
  last_name            varchar(50) not null, 
  email             varchar(60) not null,
-     dept_name        varchar(20) not null, 
-    desired_load_min        decimal(3,1) not null check (desired_load_min >= 0),
-    desired_load_max        decimal(3,1) not null check (desired_load_max >= desired_load_min),
-     primary key (instructor_id)
-    );
+dept_name        varchar(20) not null, 
+desired_load_min        decimal(3,1) not null check (desired_load_min >= 0),
+desired_load_max        decimal(3,1) not null check (desired_load_max >= desired_load_min),
+    primary key (instructor_id)
+);
 create table course_offering 
 
 (course_id             varchar(6) not null, 
@@ -41,8 +41,8 @@ primary key (course_id, course_type, semester, year, section_num),
 foreign key(course_id, num_credits) references course(course_id, num_credits));
 
 create table mod_table
-    (mod_name        varchar(3) not null,
-    start_time        time(0),
+(mod_name        varchar(3) not null,
+start_time        time(0),
 end_time        time(0),
 mod_credits        decimal(1, 0) check (mod_credits >= 3 and mod_credits <= 4),
 days_of_week        varchar(5),
