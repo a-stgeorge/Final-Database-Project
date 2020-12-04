@@ -15,12 +15,20 @@
             Home
         </button>
         <br/>
-        <button type="button" id='button'>Get all students</button>
+        <button type="button" id='refreshDropdowns'>Refresh dropdowns</button>
 
-        <!-- TODO List all instructors list courses with filter functionality -->
-        <form>
+        <div>
+            <label for="offerings">Course Offerings:</label>
+            <span id="offerings"></span>
+        </div>
 
-        </form>
+        <div>
+            <label for="instructors">Instructors:</label>
+            <span id="instructors"></span>
+        </div>
+
+        <button type="button" id='assign'>Assign selected offering to selected instructor</button>
+        <button type="button" id='unassign'>Un-assign selected offering from selected instructor</button>
 
         <div id="result"></div>
     </body>
