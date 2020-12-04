@@ -17,7 +17,18 @@ function create_cluster(){
 }
 
 async function getCourses() {
-    return fetch('/action/page6', { method: 'POST' }).then(async response => {
+    
+    let data = {
+        query: 'select course_id, title, dept_name from course'
+    };
+    return fetch('/action/page6', 
+    { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(async response => {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('courses').innerHTML = responseMessage;
