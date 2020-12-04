@@ -1,0 +1,1 @@
+insert into course values('COS100', 'Intro to Programming', 'MathCs', 3, NULL);
