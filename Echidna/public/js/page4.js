@@ -3,8 +3,92 @@ window.onload = () => {
     document.getElementById('refreshDropdowns').onclick = refreshDropdowns;
     document.getElementById('assign').onclick = assign;
     document.getElementById('unassign').onclick = unassign;
+
+    document.getElementById('offeringsPerInstructor').onclick = offeringsPerInstructor;
+    document.getElementById('instructorsPerOfferings').onclick = instructorsPerOfferings;
+    document.getElementById('unassignedCourseOfferings').onclick = unassignedCourseOfferings;
+    document.getElementById('targetLoads').onclick = targetLoads;
+    document.getElementById('clearReport').onclick = clearReport;
+
     courseOfferingsDropDown().then(() => offeringOnChange());
     instructorDropdown().then(() => instructorOnChange());
+}
+
+function offeringsPerInstructor() {
+    let data = {
+        query: `select instructor_id, first_name, last_name, course_id, course_type, semester, year, section_num 
+        from teaches join instructor using(instructor_id) order by instructor_id`
+    };
+    fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            return;
+        }
+        let responseJson = await response.json();
+        document.getElementById('report').innerHTML = ''
+        constructTable('#report', responseJson);
+    });
+}
+
+function instructorsPerOfferings() {
+    let data = {
+        query: `select course_id, course_type, semester, year, section_num, instructor_id, first_name, last_name
+        from teaches join instructor using(instructor_id) order by course_id`
+    };
+    fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            return;
+        }
+        let responseJson = await response.json();
+        document.getElementById('report').innerHTML = ''
+        constructTable('#report', responseJson);
+    });
+}
+
+function unassignedCourseOfferings() {
+    let data = {
+        query: `select course_id, course_type, semester, year, section_num 
+        from course_offering natural left join teaches where instructor_id is NULL`
+    };
+    fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            return;
+        }
+        let responseJson = await response.json();
+        document.getElementById('report').innerHTML = ''
+        constructTable('#report', responseJson);
+    });
+}
+
+function targetLoads() {
+//TODO this query is gonna be weird, adding up the TEU values in course_offerings join teaches and then checking
+//if it is over or under an instructors desired values
 }
 
 function refreshDropdowns() {
@@ -13,6 +97,7 @@ function refreshDropdowns() {
 }
 
 function assign() {
+    clearReport();
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let selectedInstructor = document.getElementById('instructorsSelect').value;
 
@@ -33,6 +118,7 @@ function assign() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         instructorOnChange();
@@ -40,9 +126,8 @@ function assign() {
     });
 }
 
-//TODO when error occurs make sure it gets cleaned up/goes away...
-
 function unassign() {
+    clearReport();
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let selectedInstructor = document.getElementById('instructorsSelect').value;
 
@@ -67,7 +152,15 @@ function unassign() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
+        }
+        let responseJson = await response.json();
+        //This means the delete didn't do anything (ie bad request)
+        if (responseJson.affectedRows === 0) {
+            document.getElementById('result').innerHTML = `No rows were affected because that instructor doesn't 
+            teach that course offering.`;
+            clearResultDiv();
         }
         instructorOnChange();
         offeringOnChange();
@@ -89,6 +182,7 @@ function courseOfferingsDropDown() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         let responseJson = await response.json();
@@ -99,24 +193,23 @@ function courseOfferingsDropDown() {
 
 function populateOfferingDropdown(data) {
     let selectDropdown = document.getElementById('offeringsSelect');
-    if (!selectDropdown){
+    if (!selectDropdown) {
         selectDropdown = document.createElement('select');
         selectDropdown.setAttribute('id', 'offeringsSelect');
         document.getElementById('offerings').appendChild(selectDropdown);
     }
     selectDropdown.onchange = offeringOnChange;
     //clear any options in the select dropdown if present
-    for (let i = selectDropdown.length - 1; i >= 0; i--){
+    for (let i = selectDropdown.length - 1; i >= 0; i--) {
         selectDropdown.remove(i);
     }
     let option;
     for (let i = 0; i < data.length; i++) {
-      option = document.createElement('option');
-      option.text = `${data[i].course_id}, Section: ${data[i].section_num}, 
+        option = document.createElement('option');
+        option.text = `${data[i].course_id}, Section: ${data[i].section_num}, 
       ${data[i].course_type}, ${data[i].semester}, ${data[i].year}`;
-      //TODO might want a more helpful value for this dropdown
-      option.value = JSON.stringify(data[i]);
-      selectDropdown.add(option);
+        option.value = JSON.stringify(data[i]);
+        selectDropdown.add(option);
     }
 }
 
@@ -135,6 +228,7 @@ function instructorDropdown() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         let responseJson = await response.json();
@@ -143,29 +237,30 @@ function instructorDropdown() {
     });
 }
 
-function populateInstructorDropdown(data){
+function populateInstructorDropdown(data) {
     let selectDropdown = document.getElementById('instructorsSelect');
-    if (!selectDropdown){
+    if (!selectDropdown) {
         selectDropdown = document.createElement('select');
         selectDropdown.setAttribute('id', 'instructorsSelect');
         document.getElementById('instructors').appendChild(selectDropdown);
     }
     selectDropdown.onchange = instructorOnChange;
     //clear any options in the select dropdown if present
-    for (let i = selectDropdown.length - 1; i >= 0; i--){
+    for (let i = selectDropdown.length - 1; i >= 0; i--) {
         selectDropdown.remove(i);
     }
     let option;
     for (let i = 0; i < data.length; i++) {
-      option = document.createElement('option');
-      option.text = `${data[i].instructor_id}, ${data[i].first_name}, 
+        option = document.createElement('option');
+        option.text = `${data[i].instructor_id}, ${data[i].first_name}, 
       ${data[i].last_name}`;
-      option.value = data[i].instructor_id;
-      selectDropdown.add(option);
+        option.value = data[i].instructor_id;
+        selectDropdown.add(option);
     }
 }
 
 function offeringOnChange() {
+    clearReport();
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let data = {
         query: `select instructor_id from teaches where 
@@ -186,6 +281,7 @@ function offeringOnChange() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         let responseJson = await response.json();
@@ -199,6 +295,7 @@ function offeringOnChange() {
 }
 
 function instructorOnChange() {
+    clearReport();
     let selectedInstructor = JSON.parse(document.getElementById('instructorsSelect').value);
     let data = {
         query: `select course_id, course_type, semester, year, section_num from teaches where 
@@ -215,6 +312,7 @@ function instructorOnChange() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         let responseJson = await response.json();
@@ -224,7 +322,7 @@ function instructorOnChange() {
             document.getElementById('assignedCourses').innerHTML = 'None';
             return;
         }
-        for (let i = 0; i < responseJson.length; i++){
+        for (let i = 0; i < responseJson.length; i++) {
             let newPTag = document.createElement('p');
             newPTag.style = 'margin: 0';
             newPTag.innerHTML = `${responseJson[i].course_id}, ${responseJson[i].section_num}, ${responseJson[i].course_type}, 
@@ -232,4 +330,14 @@ function instructorOnChange() {
             document.getElementById('assignedCourses').appendChild(newPTag);
         }
     });
+}
+
+function clearResultDiv() {
+    setTimeout(function () {
+        document.getElementById('result').innerHTML = '';
+    }, 7000);
+}
+
+function clearReport() {
+    document.getElementById('report').innerHTML = '';
 }

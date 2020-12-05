@@ -20,6 +20,8 @@
         <button type="button" id='assign'>Assign selected offering to selected instructor</button>
         <button type="button" id='unassign'>Un-assign selected offering from selected instructor</button>
         
+        <div id="result"></div>
+
         <div style='margin-top: 5%'>
             <label for="offerings">Course Offerings:</label>
             <span id="offerings"></span>
@@ -36,7 +38,13 @@
             <div id="assignedCourses"></div>
         </div>
 
+        <button type="button" id="offeringsPerInstructor">Show course offerings assigned to each instructor</button>
+        <button type="button" id="instructorsPerOfferings">Show instructors assigned to each course offering</button>
+        <button type="button" id="unassignedCourseOfferings">Show course offerings not assigned to an instructor</button>
+        <button type="button" id="targetLoads">Show instructors not at their target loads</button>
+        <button type="button" id="clearReport">Clear report</button>
 
-        <div id="result"></div>
+        <div id="report"></div>
+
     </body>
 </html>
