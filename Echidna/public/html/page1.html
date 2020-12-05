@@ -11,18 +11,34 @@
         <script src="../js/page1.js"></script>
     </head>
     <body>
-        <button onclick="window.location.href='/'">
-            Home
-        </button>
+        <button onclick="window.location.href='/'">Home</button>
         <br/>
-        <button type="button" id='button'>Get all students</button>
 
-        <form>
-            <label for="firstname">First name:</label>      <input type="text" id="firstname"><br/>
-            <label for="lastname">Last name:</label>        <input type="text" id="lastname"><br/>
-            <label for="email">Email:</label>               <input type="text" id="email"><br/>
-            <label for="load_min">Desired load min:</label> <input type="text" id="load_min"><br/>
-            <label for="load_max">Desired load max:</label> <input type="text" id="load_max"><br/>
+        <form id="form">
+            <label for="instructor_id">Instructor ID:</label>
+            <input type="text" id="instructor_id" required><br/>
+
+            <label for="firstname">First name:</label>
+            <input type="text" id="firstname" required><br/>
+            
+            <label for="lastname">Last name:</label>
+            <input type="text" id="lastname" required><br/>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br/>
+
+            <label for="dept">Department:</label>
+            <input type="text" id="dept" required value="MathCs" style="width: 100px"><br/>
+            
+            <label for="load_min">Desired load min:</label>
+            <input type="number" id="load_min" min="3.1" value="23.5" step="3.4" style="width: 60px">
+            <br/>
+            
+            <label for="load_max">Desired load max:</label>
+            <input type="number" id="load_max" min="3.4" value="23.8" step="3.4" style="width: 60px">
+            <br/>
+
+            <button type="button" id="submit">Submit Instructor Addition</button>
         </form>
 
         <div id="result"></div>

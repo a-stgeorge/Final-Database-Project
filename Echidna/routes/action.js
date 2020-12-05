@@ -39,8 +39,9 @@ router.post('/timeWarp/:timeWarpNum', async function (req, res) {
 });
 
 router.post('/page1', async function (req, res) {
+	let body = req.body;
 	try {
-		let answer = await makeQuery(connection, 'select * from student');
+		let answer = await makeQuery(connection, body.query);
 		res.status(200).send(answer);
 	} catch (err) {
 		res.status(400).send(err.message);
