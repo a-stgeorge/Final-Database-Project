@@ -16,19 +16,26 @@
         </button>
         <br/>
         <button type="button" id='refreshDropdowns'>Refresh dropdowns</button>
-
-        <div>
-            <label for="offerings">Course Offerings:</label>
-            <span id="offerings"></span>
-        </div>
-
-        <div>
-            <label for="instructors">Instructors:</label>
-            <span id="instructors"></span>
-        </div>
-
+        
         <button type="button" id='assign'>Assign selected offering to selected instructor</button>
         <button type="button" id='unassign'>Un-assign selected offering from selected instructor</button>
+        
+        <div style='margin-top: 5%'>
+            <label for="offerings">Course Offerings:</label>
+            <span id="offerings"></span>
+            <br/>
+            <label for="assignedInstructor">ID of instructor assigned to this course:</label>
+            <span id="assignedInstructor"></span>
+        </div>
+
+        <div style='margin-top: 2%'>
+            <label for="instructors">Instructors:</label>
+            <span id="instructors"></span>
+            <br/>
+            <label for="assignedCourses">Courses assigned to this instructor:</label>
+            <div id="assignedCourses"></div>
+        </div>
+
 
         <div id="result"></div>
     </body>

@@ -3,8 +3,8 @@ window.onload = () => {
     document.getElementById('refreshDropdowns').onclick = refreshDropdowns;
     document.getElementById('assign').onclick = assign;
     document.getElementById('unassign').onclick = unassign;
-    courseOfferingsDropDown();
-    instructorDropdown();
+    courseOfferingsDropDown().then(() => offeringOnChange());
+    instructorDropdown().then(() => instructorOnChange());
 }
 
 function refreshDropdowns() {
@@ -13,19 +13,65 @@ function refreshDropdowns() {
 }
 
 function assign() {
-    let selectedOffering = document.getElementById('offeringsSelect').value;
+    let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let selectedInstructor = document.getElementById('instructorsSelect').value;
-    console.log(selectedOffering);
-    console.log('Instructor id:', selectedInstructor);
-    //TODO make fancy query here to place value in teaches table
+
+    let data = {
+        query: `insert into teaches values(${selectedInstructor}, '${selectedOffering.course_id}', 
+            '${selectedOffering.course_type}', '${selectedOffering.semester}', ${selectedOffering.year}, 
+            ${selectedOffering.section_num}, NULL, NULL)`
+    };
+
+    return fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            return;
+        }
+        instructorOnChange();
+        offeringOnChange();
+    });
 }
 
+//TODO when error occurs make sure it gets cleaned up/goes away...
+
 function unassign() {
-    let selectedOffering = document.getElementById('offeringsSelect').value;
+    let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let selectedInstructor = document.getElementById('instructorsSelect').value;
-    console.log(selectedOffering);
-    console.log('Instructor id:', selectedInstructor);
-    //TODO make fancy query here to remove value in teaches table
+
+    let data = {
+        query: `delete from teaches where 
+        instructor_id = ${selectedInstructor} and
+        course_id = '${selectedOffering.course_id}' and
+        course_type = '${selectedOffering.course_type}' and
+        semester = '${selectedOffering.semester}' and
+        year = ${selectedOffering.year} and
+        section_num = ${selectedOffering.section_num}`
+    };
+
+    return fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            return;
+        }
+        instructorOnChange();
+        offeringOnChange();
+    });
 }
 
 function courseOfferingsDropDown() {
@@ -120,11 +166,70 @@ function populateInstructorDropdown(data){
 }
 
 function offeringOnChange() {
-    console.log('offering changed!');
-    //TODO query teaches and see if this offering has an instructor attached
+    let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
+    let data = {
+        query: `select instructor_id from teaches where 
+        course_id = '${selectedOffering.course_id}' 
+        and section_num = ${selectedOffering.section_num} 
+        and course_type = '${selectedOffering.course_type}' 
+        and semester = '${selectedOffering.semester}' 
+        and year = ${selectedOffering.year}`
+    };
+    return fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            return;
+        }
+        let responseJson = await response.json();
+        //This means no instructor is teaching this offering
+        if (responseJson.length === 0) {
+            document.getElementById('assignedInstructor').innerHTML = 'None';
+            return;
+        }
+        document.getElementById('assignedInstructor').innerHTML = JSON.stringify(responseJson[0].instructor_id);
+    });
 }
 
 function instructorOnChange() {
-    console.log('instructor changed!');
-    //TODO query teaches and see if this instructor has a course attached
+    let selectedInstructor = JSON.parse(document.getElementById('instructorsSelect').value);
+    let data = {
+        query: `select course_id, course_type, semester, year, section_num from teaches where 
+        instructor_id = ${selectedInstructor}`
+    };
+    return fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            return;
+        }
+        let responseJson = await response.json();
+        document.getElementById('assignedCourses').innerHTML = '';
+        //This means no course offerings taught by this instructor
+        if (responseJson.length === 0) {
+            document.getElementById('assignedCourses').innerHTML = 'None';
+            return;
+        }
+        for (let i = 0; i < responseJson.length; i++){
+            let newPTag = document.createElement('p');
+            newPTag.style = 'margin: 0';
+            newPTag.innerHTML = `${responseJson[i].course_id}, ${responseJson[i].section_num}, ${responseJson[i].course_type}, 
+            ${responseJson[i].semester}, ${responseJson[i].year}`;
+            document.getElementById('assignedCourses').appendChild(newPTag);
+        }
+    });
 }

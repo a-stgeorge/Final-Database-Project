@@ -1,0 +1,250 @@
+insert into instructor values(10000001, 'John', 'Smith', 'jsmith@college.edu', 'MathCs', 23.5, 23.8);
+insert into instructor values(10000002, 'Joe', 'Biden', 'jbiden@college.edu', 'MathCs', 23.0, 24.0);
+insert into instructor values(10000003, 'Tom', 'Holland', 'tholland@college.edu', 'MathCs', 20.5, 22.7);
+insert into instructor values(10000004, 'Donald', 'Trump', 'dtrump@college.edu', 'MathCs', 19.5, 21.9);
+insert into instructor values(10000005, 'Alvin', 'Kamara', 'akamara@college.edu', 'MathCs', 10.0, 12.0);
+insert into instructor values(10000006, 'John', 'Cena', 'jcena@college.edu', 'MathCs', 25.3, 26.8);
+insert into instructor values(10000007, 'Kirk', 'Cousins', 'kcousins@college.edu', 'MathCs', 20.2, 21.4);
+insert into instructor values(10000008, 'Xin', 'HuaShi', 'xhuashi@college.edu', 'MathCs', 18.5, 22.1);
+insert into instructor values(10000009, 'Rafael', 'Nadal', 'rdadal@college.edu', 'MathCs', 20.5, 23.5);
+insert into instructor values(10000010, 'Sally', 'Smith', 'ssmith@college.edu', 'MathCs', 20.5, 26.5);
+
+
+
+#########################
+# TODO this is just some data Anit put together so you can populate the database. It is not the completed phase 5
+#########################
+
+
+
+insert into course values('COS100', 'Intro to Programming', 'MathCs', 3, NULL);
+insert into course values('COS105', 'Object-oriented Design and Programming', 'MathCs', 4, NULL);
+insert into course values('COS205', 'Scientific Computing', 'MathCs', 3, NULL);
+insert into course values('COS212', 'Data Structures', 'MathCs', 4, NULL);
+insert into course values('COS214', 'Computer Architecture', 'MathCs', 4, NULL);
+insert into course values('COS216', 'Algorithms and Advanced Data Structures', 'MathCs', 3, NULL);
+insert into course values('COS235', 'Computer Systems', 'MathCs', 4, NULL);
+insert into course values('COS301', 'Operating Systems', 'MathCs', 4, NULL);
+insert into course values('COS313', 'Database Systems', 'MathCs', 3, NULL);
+insert into course values('COS318', 'Web Programming', 'MathCs', 3, NULL);
+insert into course values('COS320', 'Computer Graphics Programming', 'MathCs', 3, NULL);
+insert into course values('COS334', 'Data Mining and Machine Learning', 'MathCs', 3, NULL);
+insert into course values('COS335', 'Computer Security', 'MathCs', 3, NULL);
+insert into course values('COS351', 'High Performance Computing', 'MathCs', 3, NULL);
+insert into course values('COS371', 'Organization of Programming Languages', 'MathCs', 3, NULL);
+insert into course values('MAT101', 'Math for the 21st Century', 'MathCs', 3, NULL);
+insert into course values('MAT102', 'Creative Problem Solving', 'MathCs', 3, NULL);
+insert into course values('MAT123', 'Precalculus', 'MathCs', 3, NULL);
+insert into course values('MAT124', 'Calculus 1', 'MathCs', 3, NULL);
+insert into course values('MAT125', 'Calculus 2', 'MathCs', 3, NULL);
+insert into course values('MAT201', 'Mathematics for Elementary Education 1', 'MathCs', 3, NULL);
+insert into course values('MAT202', 'Mathematics for Elementary Education 2', 'MathCs', 3, NULL);
+insert into course values('MAT207', 'Statistical Analysis', 'MathCs', 3, NULL);
+insert into course values('MAT209', 'Financial Mathematics', 'MathCs', 3, NULL);
+insert into course values('MAT211', 'Linear Algebra', 'MathCs', 3, NULL);
+insert into course values('MAT222', 'Differential Equations', 'MathCs', 3, NULL);
+insert into course values('MAT223', 'Multivariable Calculus', 'MathCs', 3, NULL);
+insert into course values('MAT241', 'Discrete Mathematics', 'MathCs', 3, NULL);
+insert into course values('MAT330', 'Probability and Statistics', 'MathCs', 3, NULL);
+insert into course values('MAT376', 'Operations Research', 'MathCs', 3, NULL);
+insert into course values('MAT422', 'Real Analysis', 'MathCs', 4, NULL);
+insert into course values('MAT499', 'Foundations of Mathematics', 'MathCs', 3, NULL);
+
+insert into course_offering values('COS100', 'InPerson', 'Fall', 2020, 1 , 3 , 3.4);
+insert into course_offering values('COS100', 'InPerson', 'Fall', 2020, 2 , 3 , 3.4);
+insert into course_offering values('COS100', 'InPerson', 'Interim', 2021, 1 , 3 , 3.4);
+insert into course_offering values('COS100', 'InPerson', 'Spring', 2021, 1 , 3 , 3.4);
+insert into course_offering values('COS105', 'InPerson', 'Spring', 2021, 1 , 4 , 3.4);
+insert into course_offering values('COS105', 'InPerson', 'Fall', 2020, 1 , 4 , 3.4);
+insert into course_offering values('COS105', 'Online', 'Spring', 2021, 2 , 4 , 3.4);
+insert into course_offering values('COS205', 'InPerson', 'Fall', 2020, 1 , 3 , 3.4);
+insert into course_offering values('COS205', 'InPerson', 'Spring', 2021, 1 , 3 , 3.4);
+insert into course_offering values('COS212', 'InPerson', 'Fall', 2020, 1 , 4 , 3.4);
+insert into course_offering values('COS212', 'InPerson', 'Spring', 2021, 1 , 4 , 3.4);
+insert into course_offering values('COS214', 'InPerson', 'Fall', 2020, 1, 4, 3.4);
+insert into course_offering values('COS214', 'InPerson', 'Spring', 2021, 1, 4, 3.4);
+insert into course_offering values('COS214', 'InPerson', 'Spring', 2021, 2, 4, 3.4);
+insert into course_offering values('COS216', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('COS216', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('COS216', 'InPerson', 'Spring', 2021, 3, 3, 3.4);
+insert into course_offering values('COS235', 'Online', 'Spring', 2021, 1, 4, 3.4);
+insert into course_offering values('COS301', 'InPerson', 'Fall', 2020, 1, 4, 3.4);
+insert into course_offering values('COS301', 'InPerson', 'Fall', 2020, 2, 4, 3.4);
+insert into course_offering values('COS313', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('COS313', 'InPerson', 'Fall', 2020, 2, 3, 3.4);
+insert into course_offering values('COS318', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('COS318', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('COS320', 'Online', 'Interim', 2021, 1, 3, 3.4);
+insert into course_offering values('COS334', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('COS334', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('COS335', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('COS335', 'InPerson', 'Fall', 2020, 2, 3, 3.4);
+insert into course_offering values('COS351', 'InPerson', 'Interim', 2021, 1, 3, 3.4);
+insert into course_offering values('COS371', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('COS371', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('MAT101', 'InPerson', 'Interim', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT101', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT101', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT102', 'Online', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT102', 'InPerson', 'Fall', 2020, 2, 3, 3.4);
+insert into course_offering values('MAT102', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT124', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT124', 'InPerson', 'Fall', 2020, 2, 3, 3.4);
+insert into course_offering values('MAT124', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT125', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT125', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT125', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('MAT207', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT207', 'Online', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('MAT207', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT209', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT209', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT211', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT211', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('MAT222', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT222', 'Online', 'Spring', 2021, 3, 3, 3.4);
+insert into course_offering values('MAT222', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT222', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('MAT223', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT223', 'InPerson', 'Fall', 2020, 2, 3, 3.4);
+insert into course_offering values('MAT223', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT223', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('MAT223', 'Online', 'Interim', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT241', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT241', 'InPerson', 'Fall', 2020, 2, 3, 3.4);
+insert into course_offering values('MAT241', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT241', 'InPerson', 'Fall', 2020, 3, 3, 3.4);
+insert into course_offering values('MAT330', 'InPerson', 'Spring', 2021, 1, 3, 3.4);
+insert into course_offering values('MAT330', 'InPerson', 'Spring', 2021, 2, 3, 3.4);
+insert into course_offering values('MAT376', 'InPerson', 'Fall', 2020, 1, 3, 3.4);
+insert into course_offering values('MAT422', 'InPerson', 'Fall', 2020, 1, 4, 3.4);
+insert into course_offering values('MAT422', 'InPerson', 'Fall', 2020, 2, 4, 3.4);
+insert into course_offering values('MAT499', 'InPerson', 'Interim', 2021, 1, 3, 3.4);
+
+
+insert into mod_table values('A', '8:00:00', '8:50:00', 3 , 'MWF');
+insert into mod_table values('A', '7:40:00', '8:50:00', 4 , 'MWF');
+insert into mod_table values('B', '9:00:00', '9:50:00', 3 , 'MWF');
+insert into mod_table values('B', '9:00:00', '10:10:00', 4 , 'MWF');
+insert into mod_table values('C', '11:10:00', '12:00:00', 3 , 'MWF');
+insert into mod_table values('C', '11:10:00', '12:20:00', 4 , 'MWF');
+insert into mod_table values('D', '12:30:00', '13:20:00', 3 , 'MWF');
+insert into mod_table values('D', '12:30:00', '13:40:00', 4 , 'MWF');
+insert into mod_table values('E', '13:50:00', '14:40:00', 3 , 'MWF');
+insert into mod_table values('F', '14:50:00', '15:40:00', 3 , 'MWF');
+insert into mod_table values('F', '14:50:00', '16:00:00', 4 , 'MWF');
+insert into mod_table values('K', '16:10:00', '17:25:00', 3 , 'MW');
+insert into mod_table values('K', '16:10:00', '17:50:00', 4 , 'MW');
+insert into mod_table values('M', '18:00:00', '21:00:00', 3 , 'M');
+insert into mod_table values('M', '18:00:00', '22:00:00', 4 , 'M');
+insert into mod_table values('G', '8:00:00', '9:15:00', 3 , 'TR');
+insert into mod_table values('H', '9:25:00', '10:40:00', 3 , 'TR');
+insert into mod_table values('H', '9:25:00', '11:05:00', 4 , 'TR');
+insert into mod_table values('I', '12:15:00', '13:30:00', 3 , 'TR');
+insert into mod_table values('I', '12:15:00', '13:55:00', 4 , 'TR');
+insert into mod_table values('J', '14:05:00', '15:20:00', 3 , 'TR');
+insert into mod_table values('J', '14:05:00', '15:45:00', 4 , 'TR');
+insert into mod_table values('T', '18:00:00', '21:00:00', 3 , 'T');
+insert into mod_table values('T', '18:00:00', '22:00:00', 4 , 'T');
+insert into mod_table values('W', '18:00:00', '21:00:00', 3 , 'W');
+insert into mod_table values('W', '18:00:00', '22:00:00', 4 , 'W');
+insert into mod_table values('R', '18:00:00', '21:00:00', 3 , 'R');
+insert into mod_table values('R', '18:00:00', '22:00:00', 4 , 'R');
+insert into mod_table values('AA', '8:00:00', '10:45:00', 3, 'MTWRF');
+insert into mod_table values('BB', '13:00:00', '15:45:00', 3, 'MTWRF');
+insert into mod_table values ('OL', NULL, NULL, 3, NULL);
+insert into mod_table values ('OL', NULL, NULL, 4, NULL);
+
+insert into teaches values(10000001, 'COS100', 'InPerson', 'fall', 2020, 1, 'A', 3);
+insert into teaches values(10000001, 'COS313', 'InPerson', 'fall', 2020, 2, 'E', 3);
+insert into teaches values(10000001, 'MAT125', 'InPerson', 'fall', 2020, 1, 'H', 3);
+insert into teaches values(10000001, 'MAT101', 'InPerson', 'fall', 2020, 1, 'J', 3);
+
+insert into teaches values(10000002, 'COS100', 'InPerson', 'fall', 2020, 2, 'B', 3);
+insert into teaches values(10000002, 'MAT241', 'InPerson', 'fall', 2020, 1, 'M', 3);
+insert into teaches values(10000002, 'MAT102', 'InPerson', 'fall', 2020, 2, 'R', 3);
+
+insert into teaches values(10000003, 'COS301', 'InPerson', 'fall', 2020, 1, 'F', 4);
+insert into teaches values(10000003, 'MAT209', 'InPerson', 'fall', 2020, 1, 'T', 3);
+insert into teaches values(10000003, 'MAT102', 'Online', 'fall', 2020, 1, 'OL', 3);
+
+
+insert into teaches values(10000004, 'MAT124', 'InPerson', 'fall', 2020, 1, 'C', 3);
+insert into teaches values(10000004, 'MAT207', 'InPerson', 'fall', 2020, 1, 'I', 3);
+
+
+insert into teaches values(10000005, 'COS105', 'InPerson', 'fall', 2020, 1, 'B', 4);
+insert into teaches values(10000005, 'COS212', 'InPerson', 'fall', 2020, 1, 'D', 4);
+insert into teaches values(10000005, 'COS335', 'InPerson', 'fall', 2020, 1, 'E', 3);
+insert into teaches values(10000005, 'MAT241', 'InPerson', 'fall', 2020, 2, 'R', 3);
+
+insert into teaches values(10000006, 'COS205', 'InPerson', 'fall', 2020, 1, 'M', 3);
+
+insert into teaches values(10000007, 'COS214', 'InPerson', 'fall', 2020, 1, 'D', 4);
+insert into teaches values(10000007, 'COS335', 'InPerson', 'fall', 2020, 2, 'G', 3);
+insert into teaches values(10000007, 'MAT222', 'InPerson', 'fall', 2020, 1, 'T', 3);
+insert into teaches values(10000007, 'COS301', 'InPerson', 'fall', 2020, 1, 'W', 4);
+
+insert into teaches values(10000008, 'MAT422', 'InPerson', 'fall', 2020, 1, 'B', 4);
+insert into teaches values(10000008, 'MAT422', 'InPerson', 'fall', 2020, 2, 'C', 4);
+insert into teaches values(10000008, 'COS313', 'InPerson', 'fall', 2020, 1, 'E', 3);
+insert into teaches values(10000008, 'MAT241', 'InPerson', 'fall', 2020, 3, 'I', 3);
+
+insert into teaches values(10000009, 'MAT376', 'InPerson', 'fall', 2020, 1, 'A', 3);
+insert into teaches values(10000009, 'MAT124', 'InPerson', 'fall', 2020, 2, 'G', 3);
+insert into teaches values(10000009, 'MAT223', 'InPerson', 'fall', 2020, 1, 'T', 3);
+insert into teaches values(10000009, 'MAT223', 'InPerson', 'fall', 2020, 2, 'R', 3);
+
+insert into teaches values(10000001, 'COS100', 'InPerson', 'interim', 2021, 1, 'AA', 3);
+insert into teaches values(10000002, 'COS320', 'Online', 'interim', 2021, 1, 'OL', 3);
+insert into teaches values(10000003, 'COS351', 'InPerson', 'interim', 2021, 1, 'BB', 3);
+insert into teaches values(10000004, 'MAT101', 'InPerson', 'interim', 2021, 1, 'BB', 3);
+insert into teaches values(10000006, 'MAT223', 'Online', 'interim', 2021, 1, 'BB', 3);
+insert into teaches values(10000007, 'MAT499', 'InPerson', 'interim', 2021, 1, 'AA', 3);
+
+insert into teaches values(10000001, 'COS100', 'InPerson', 'spring', 2021, 1, 'A', 3);
+insert into teaches values(10000001, 'COS334', 'InPerson', 'spring', 2021, 1, 'C', 3);
+insert into teaches values(10000001, 'COS334', 'InPerson', 'spring', 2021, 2, 'K', 3);
+insert into teaches values(10000001, 'MAT102', 'InPerson', 'spring', 2021, 1, 'T', 3);
+
+
+insert into teaches values(10000002, 'COS105', 'InPerson', 'spring', 2021, 1, 'B', 4);
+insert into teaches values(10000002, 'COS216', 'InPerson', 'spring', 2021, 1, 'F', 3);
+insert into teaches values(10000002, 'MAT124', 'InPerson', 'spring', 2021, 1, 'J', 3);
+
+
+insert into teaches values(10000003, 'COS318', 'InPerson', 'spring', 2021, 1, 'C', 3);
+insert into teaches values(10000003, 'MAT207', 'InPerson', 'spring', 2021, 1, 'G', 3);
+insert into teaches values(10000003, 'MAT223', 'InPerson', 'spring', 2021, 1, 'J', 3);
+insert into teaches values(10000003, 'COS105', 'Online', 'spring', 2021, 2, 'A', 4);
+
+insert into teaches values(10000004, 'COS205', 'InPerson', 'spring', 2021, 1, 'D', 3);
+insert into teaches values(10000004, 'COS371', 'InPerson', 'spring', 2021, 1, 'J', 3);
+insert into teaches values(10000004, 'MAT223', 'InPerson', 'spring', 2021, 2, 'M', 3);
+
+
+insert into teaches values(10000005, 'MAT211', 'InPerson', 'spring', 2021, 2, 'A', 3);
+insert into teaches values(10000005, 'COS212', 'InPerson', 'spring', 2021, 1, 'K', 4);
+insert into teaches values(10000005, 'COS371', 'InPerson', 'spring', 2021, 2, 'I', 3);
+
+insert into teaches values(10000006, 'MAT222', 'InPerson', 'spring', 2021, 1, 'C', 3);
+insert into teaches values(10000006, 'COS214', 'InPerson', 'spring', 2021, 1, 'A', 4);
+insert into teaches values(10000006, 'MAT101', 'InPerson', 'spring', 2021, 1, 'J', 3);
+insert into teaches values(10000006, 'MAT241', 'InPerson', 'spring', 2021, 1, 'W', 3);
+insert into teaches values(10000006, 'MAT222', 'Online', 'spring', 2021, 3, 'OL', 3);
+
+insert into teaches values(10000007, 'COS318', 'InPerson', 'spring', 2021, 2, 'B', 3);
+insert into teaches values(10000007, 'MAT125', 'InPerson', 'spring', 2021, 1, 'K', 3);
+insert into teaches values(10000007, 'MAT330', 'InPerson', 'spring', 2021, 1, 'T', 3);
+insert into teaches values(10000007, 'COS235', 'Online', 'spring', 2021,1 , 'OL', 4);
+insert into teaches values(10000007, 'MAT207', 'Online', 'spring', 2021, 2, 'OL', 3);
+
+insert into teaches values(10000008, 'MAT211', 'InPerson', 'spring', 2021, 1, 'A', 3);
+insert into teaches values(10000008, 'COS214', 'InPerson', 'spring', 2021, 2, 'F', 4);
+insert into teaches values(10000008, 'COS216', 'InPerson', 'spring', 2021, 3, 'H', 3);
+insert into teaches values(10000008, 'MAT330', 'InPerson', 'spring', 2021, 2, 'W', 3);
+
+insert into teaches values(10000010, 'MAT209', 'InPerson', 'spring', 2021, 1, 'A', 3);
+insert into teaches values(10000010, 'MAT222', 'InPerson', 'spring', 2021, 2, 'C', 3);
+insert into teaches values(10000010, 'COS216', 'InPerson', 'spring', 2021, 2, 'G', 3);
+insert into teaches values(10000010, 'MAT125', 'InPerson', 'spring', 2021, 2, 'M', 3);

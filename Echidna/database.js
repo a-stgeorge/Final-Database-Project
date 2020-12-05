@@ -23,7 +23,7 @@ module.exports = {
         });
         try {
             let conn = await pool.getConnection();
-            console.log('Connection to MariaDb made');
+            console.log('Connection to MariaDb made (or re-established)');
             return conn;
         } catch (err) {
             throw err;
