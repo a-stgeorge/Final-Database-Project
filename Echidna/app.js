@@ -18,6 +18,10 @@ app.get('/', async function (req, res) {
 
 /** TODO LIST:
  * - In database.js remember to use the 'Echidna' database when ready!
+ * - For data forms, how should we handle values that can be null? Accept empty form or force NULL entry?
+ * - Don't forget Non Instructional loads (add to course sections page?)
+ * - Refactor errors into showError method? [Allows for error message and auto clear timer]
+ * - For page 4: might need to show all instructors teaching a course, not just one
  */
 
 const server = app.listen(port, function() {

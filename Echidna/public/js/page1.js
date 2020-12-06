@@ -4,7 +4,7 @@ window.onload = () => {
     document.getElementById('form').onsubmit = (e) => {
         e.preventDefault();
     };
-    instructorDropdown();
+    coursesDropdown();
     console.log('Page 1 boi');
 }
 
@@ -29,7 +29,8 @@ async function addInstructor() {
     let loadMax = document.getElementById('load_max').value;
     
     if (!document.getElementById('form').checkValidity()) {
-        document.getElementById('result').innerHTML = 'Bad data in form, offending field is bordered red.';
+        document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) is bordered red.';
+        clearResultDiv();
         return;
     }
 
@@ -59,12 +60,13 @@ async function addInstructor() {
                 return;
             }
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         document.getElementById('result').innerHTML = 'Success!';
         clearResultDiv();
         clearInputs();
-        instructorDropdown();
+        coursesDropdown();
     });
 }
 
@@ -96,12 +98,12 @@ async function overwriteFlow(instructorId, firstName, lastName, email, deptName,
             document.getElementById('result').innerHTML = 'Success! Instructor updated';
             clearResultDiv();
             clearInputs();
-            instructorDropdown();
+            coursesDropdown();
         });
     }
 }
 
-function instructorDropdown() {
+function coursesDropdown() {
     let data = {
         query: 'select instructor_id, first_name, last_name from instructor'
     };
@@ -121,18 +123,18 @@ function instructorDropdown() {
         }
         let responseJson = await response.json();
         clearResultDiv();
-        populateInstructorDropdown(responseJson);
+        populateCoursesDropdown(responseJson);
     });
 }
 
-function populateInstructorDropdown(data) {
+function populateCoursesDropdown(data) {
     let selectDropdown = document.getElementById('instructorsSelect');
     if (!selectDropdown) {
         selectDropdown = document.createElement('select');
         selectDropdown.setAttribute('id', 'instructorsSelect');
         document.getElementById('instructors').appendChild(selectDropdown);
     }
-    selectDropdown.onchange = instructorOnChange;
+    selectDropdown.onchange = coursesOnChange;
     //clear any options in the select dropdown if present
     for (let i = selectDropdown.length - 1; i >= 0; i--) {
         selectDropdown.remove(i);
@@ -147,7 +149,7 @@ function populateInstructorDropdown(data) {
     }
 }
 
-function instructorOnChange() {
+function coursesOnChange() {
     document.getElementById('instructor_id').readOnly = true;
     let selectedInstructor = JSON.parse(document.getElementById('instructorsSelect').value);
     let data = {

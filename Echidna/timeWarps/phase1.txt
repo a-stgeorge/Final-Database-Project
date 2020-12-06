@@ -10,7 +10,7 @@ create table course
     (course_id        varchar(6) not null, 
      title            varchar(50) not null, 
      dept_name        varchar(20),
-    num_credits        decimal(2,1) not null check (num_credits >= 0),
+    num_credits        decimal(2,1) check (num_credits >= 0),
     cluster_id        integer,
      primary key (course_id)
     );
