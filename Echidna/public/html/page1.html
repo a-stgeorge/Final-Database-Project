@@ -16,7 +16,7 @@
 
         <form id="form">
             <label for="instructor_id">Instructor ID:</label>
-            <input type="text" id="instructor_id" required><br/>
+            <input type="number" id="instructor_id" required min="0" max="99999999" step="1" value="0"><br/>
 
             <label for="firstname">First name:</label>
             <input type="text" id="firstname" required><br/>
@@ -38,9 +38,15 @@
             <input type="number" id="load_max" min="3.4" value="23.8" step="3.4" style="width: 60px">
             <br/>
 
-            <button type="button" id="submit">Submit Instructor Addition</button>
+            <button type="submit" id="submit">Submit Instructor Addition/Change</button>
         </form>
+        <button type="button" id="clearInputs" style="margin-top: 10px;">Default Inputs (Clear)</button>
 
         <div id="result"></div>
+
+        <div>
+            <label for="instructors">Instructors:</label>
+            <span id="instructors"></span>
+        </div>
     </body>
 </html>
