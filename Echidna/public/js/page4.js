@@ -89,6 +89,7 @@ function unassignedCourseOfferings() {
 function targetLoads() {
 //TODO this query is gonna be weird, adding up the TEU values in course_offerings join teaches and then checking
 //if it is over or under an instructors desired values
+//select instructor_id, sum(teu_value) from course_offering natural join teaches group by instructor_id;
 }
 
 function refreshDropdowns() {
