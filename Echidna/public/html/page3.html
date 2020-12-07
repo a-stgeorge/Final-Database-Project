@@ -15,34 +15,55 @@
             Home
         </button>
         <br/>
-        <button type="button" id='button'>Get all students</button>
 
-        <form>
-            <label for="course_id">Course ID:</label><input type="text" id="course_id"><br/>
+        <form id="form">
+            <label for="course_id">Course ID:</label>
+            <input type="text" id="course_id" required><br/>
 
             <!-- TODO add text box for non instructional load selection -->
             <label for="course_type">Course type:</label>
-            <select id="course_type">
-                <option value="in_person">In person</option>
-                <option value="web">Web</option>
-                <option value="nonil">Non-instructional Load</option>
+            <select id="course_type" required>
+                <option value="InPerson">In person</option>
+                <option value="Online">Online</option>
+                <option value="nil">Non-instructional Load</option>
             </select><br/>
 
             <label for="semester">Semester:</label>
-            <select id="semester">
-                <option value="fall">Fall</option>
-                <option value="interim">Interim</option>
-                <option value="spring">Spring</option>
-                <option value="summer">Summer</option>
+            <select id="semester" required>
+                <option value="Fall">Fall</option>
+                <option value="Interim">Interim</option>
+                <option value="Spring">Spring</option>
+                <option value="Summer">Summer</option>
             </select><br/>
 
-            <label for="year">Year:</label>                 <input type="text" id="year"><br/>
-            <label for="sec_number">Section number:</label> <input type="text" id="sec_number"><br/>
-            <label for="num_credits">Number credits:</label><input type="text" id="num_credits"><br/>
-            <label for="teu">TEU value:</label>             <input type="text" id="teu"><br/>
+            <label for="year">Year:</label>
+            <input type="number" id="year" min="0" max="2500" step="1" value="2020" style="width: 100px;" required><br/>
+            
+            <label for="section_num">Section number:</label>
+            <input type="number" id="section_num" min="1" step="1" style="width: 100px;" value="1" required><br/>
+            
+            <label for="num_credits">Number credits:</label>
+            <input type="number" id="num_credits" min="0" max="9.5" step="0.5" style="width: 100px;" required><br/>
+            
+            <label for="teu">TEU value:</label>
+            <input type="number" id="teu" min="0" step="0.1" max="99.5" style="width: 100px;" value="3.4" required><br/>
 
+            <button type="submit" id="submit" style="margin-top: 10px;">Add Course Offering</button>
+            <button type="submit" id="delete" style="margin-top: 10px;">Delete Course Offering</button>
         </form>
 
+        <button id="clearInput" type="button" style="margin-top: 10px;">Clear Inputs</button>
+
         <div id="result"></div>
+
+        <div style="margin-top: 10px;">
+            <label for="courses">Courses:</label>
+            <span id="courses"></span>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <label for="courseOfferings">Course Offerings:</label>
+            <span id="courseOfferings"></span>
+        </div>
     </body>
 </html>

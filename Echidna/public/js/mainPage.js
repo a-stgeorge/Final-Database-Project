@@ -71,7 +71,7 @@ async function timeWarp5() {
             }
             document.getElementById('timeWarpStatus').innerHTML =
             `Time Warp 5 was a success. 10+ instructors, 30+ courses, and 70+ course offerings were made. Each course 
-            was assigned to an instructor and time. The database if fully populated for a year.`;
+            was assigned to an instructor and time. The database is fully populated for a year.`;
         });
     });
 }
