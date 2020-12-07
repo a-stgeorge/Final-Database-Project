@@ -75,7 +75,6 @@ foreign key fk2 (instructor_id) references instructor (instructor_id) on update 
 foreign key fk3  (mod_name, mod_credits) references mod_table (mod_name, mod_credits) on update cascade on delete set null);
 
 
-delimiter $$
 
 create trigger interim_mod_check after insert on teaches
 for each row BEGIN
@@ -91,7 +90,7 @@ and NEW.mod_name != 'OL'))
 	then
     		signal sqlstate value '45000';
 	end if;
-end $$
+end ;
 
 
 create trigger instructor_schedule_check before insert on teaches
@@ -100,7 +99,7 @@ for each row BEGIN
 	then 
 		signal sqlstate value '45000' set message_text =  'Instructor has been double scheduled!';
 	end if;
-end $$
+end ;
 
 create trigger section_increment before insert on course_offering
 for each row BEGIN
@@ -108,7 +107,7 @@ for each row BEGIN
 	do
 		set NEW.section_num = NEW.section_num + 1;
 	end while;
-end $$
+end ;
 
 
 
@@ -118,7 +117,7 @@ for each row BEGIN
 	do
 		set NEW.instructor_id = NEW.instructor_id + 1;
 	end while;
-end $$
+end ;
 
 create trigger cluster_increment before insert on course
 for each row BEGIN
@@ -129,9 +128,8 @@ for each row BEGIN
 			set NEW.cluster_id = NEW.cluster_id + 1;
 		end while;
 	end if;
-end $$
+end ;
 
-delimiter ;
 
 
 insert into instructor values(10000001, 'John', 'Smith', 'jsmith@college.edu', 'MathCs', 23.5, 23.8);

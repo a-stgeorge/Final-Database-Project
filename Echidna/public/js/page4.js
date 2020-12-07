@@ -30,6 +30,7 @@ function offeringsPerInstructor() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         let responseJson = await response.json();
@@ -54,6 +55,7 @@ function instructorsPerOfferings() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         let responseJson = await response.json();
@@ -78,6 +80,7 @@ function unassignedCourseOfferings() {
         if (!response.ok) {
             let responseMessage = await response.text();
             document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
             return;
         }
         let responseJson = await response.json();
@@ -87,9 +90,88 @@ function unassignedCourseOfferings() {
 }
 
 function targetLoads() {
-//TODO this query is gonna be weird, adding up the TEU values in course_offerings join teaches and then checking
-//if it is over or under an instructors desired values
-//select instructor_id, sum(teu_value) from course_offering natural join teaches group by instructor_id;
+    let data = {
+        query: `select instructor_id as Instructor_ID, sum(teu_value) as TEU_Value from course_offering natural join 
+        teaches right join instructor using (instructor_id) group by instructor_id`
+    };
+    fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
+            return;
+        }
+        let sumJson = await response.json();
+        document.getElementById('report').innerHTML = '';
+        loadHighOrLow(sumJson);
+    });
+}
+
+function loadHighOrLow(sumJson) {
+    let data = {
+        query: `select instructor_id, first_name, last_name, desired_load_min, desired_load_max from instructor`
+    };
+    fetch('/action/page4', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
+            return;
+        }
+        let loadJson = await response.json();
+        document.getElementById('report').innerHTML = '';
+        makeLoadTable();
+        for (let i = 0; i < loadJson.length; i++) {
+            if (sumJson[i].TEU_Value === null) {
+                addToLoadTable(sumJson[i].Instructor_ID, 0.0, 'Too Low');
+                continue;
+            }
+            if (sumJson[i].TEU_Value > loadJson[i].desired_load_max) {
+                addToLoadTable(sumJson[i].Instructor_ID, sumJson[i].TEU_Value, 'Too High');
+            }
+            if (sumJson[i].TEU_Value < loadJson[i].desired_load_min) {
+                addToLoadTable(sumJson[i].Instructor_ID, sumJson[i].TEU_Value, 'Too Low');
+            }
+        }
+    });
+}
+
+function makeLoadTable() {
+    let newTable = document.createElement('table');
+    newTable.setAttribute('id', 'table');
+    let headRow = newTable.insertRow(0);
+    let headCell0 = headRow.insertCell(0);
+    headCell0.innerHTML = 'Instuctor ID';
+    let headCell1 = headRow.insertCell(1);
+    headCell1.innerHTML = 'Current TEU Value Sum';
+    let headCell2 = headRow.insertCell(2);
+    headCell2.innerHTML = 'Too High / Too Low';
+    document.getElementById('report').appendChild(newTable);
+}
+
+function addToLoadTable(instructorID, loadSum, issue) {
+    let rowLength = document.getElementById('table').rows.length;
+    let newRow = document.getElementById('table').insertRow(rowLength);
+    let newCell0 = newRow.insertCell(0);
+    newCell0.innerHTML = instructorID;
+    let newCell1 = newRow.insertCell(1);
+    newCell1.innerHTML = loadSum;
+    let newCell2 = newRow.insertCell(2);
+    newCell2.innerHTML = issue;
 }
 
 function refreshDropdowns() {
@@ -291,7 +373,20 @@ function offeringOnChange() {
             document.getElementById('assignedInstructor').innerHTML = 'None';
             return;
         }
-        document.getElementById('assignedInstructor').innerHTML = JSON.stringify(responseJson[0].instructor_id);
+        let assignedInstructor = document.getElementById('assignedInstructor');
+        assignedInstructor.innerHTML = '';
+        for (let i = 0; i < responseJson.length; i++) {
+            if (responseJson.length === 1) {
+                assignedInstructor.innerHTML = JSON.stringify(responseJson[i].instructor_id);
+                return;
+            }
+            if (assignedInstructor.innerHTML === '') {
+                assignedInstructor.innerHTML = JSON.stringify(responseJson[i].instructor_id);
+                continue;
+            }
+            assignedInstructor.innerHTML = `${assignedInstructor.innerHTML}, 
+            ${JSON.stringify(responseJson[i].instructor_id)}`;
+        }
     });
 }
 
