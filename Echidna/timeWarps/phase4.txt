@@ -123,8 +123,8 @@ end $$
 create trigger cluster_increment before insert on course
 for each row BEGIN
 	if (NEW.cluster_id is not null)
-then
-while ( (NEW.cluster_id) in (select cluster_id from course) )
+	then
+		while ( (NEW.cluster_id) in (select cluster_id from course) )
 		do
 			set NEW.cluster_id = NEW.cluster_id + 1;
 		end while;
