@@ -6,12 +6,28 @@ window.onload = () => {
         e.preventDefault();
     };
     document.getElementById('clearInput').onclick = clearInputs;
+    document.getElementById('course_type').onchange = courseTypeOnChange;
     coursesDropdown();
     courseOfferingsDropdown();
 }
 
-//TODO handle non instructional load (needs to allow for entering into course type)
-// disable section number when adding NIL
+function courseTypeOnChange() {
+    let courseType = document.getElementById('course_type').value;
+    if (courseType === '') {
+        document.getElementById('course_id').value = 'NIL000';
+        document.getElementById('course_id').readOnly = true;
+        document.getElementById('num_credits').value = '';
+        document.getElementById('num_credits').readOnly = true;
+        document.getElementById('nilDescriptionLabel').hidden = false;
+        document.getElementById('nilDescription').hidden = false;
+    } else {
+        document.getElementById('course_id').readOnly = false;
+        document.getElementById('num_credits').readOnly = false;
+        document.getElementById('nilDescriptionLabel').hidden = true;
+        document.getElementById('nilDescription').hidden = true;
+    }
+}
+
 async function addCourseOffering() {
     let courseID = document.getElementById('course_id').value;
     let courseType = document.getElementById('course_type').value;
@@ -23,14 +39,23 @@ async function addCourseOffering() {
         numCredits = null;
     }
     let teuValue = document.getElementById('teu').value;
+    
     if (teuValue === '') {
         teuValue = null;
     }
-    
+
+    if (courseID === 'NIL000') {
+        if (document.getElementById('nilDescription').value === '') {
+            document.getElementById('result').innerHTML = 'For Non-Instructional Load you must specify a description';
+            clearResultDiv();
+            return;
+        }
+    }
+
     if (await courseExists(courseID)) {
         if (await primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum)) {
             document.getElementById('result').innerHTML = 'Cannot add course offering, it already exists';
-            clearResultDiv();    
+            clearResultDiv();
         } else {
             let data;
             if (numCredits === null && teuValue === null) {
@@ -95,6 +120,7 @@ async function addCourseOffering() {
                 }
                 document.getElementById('result').innerHTML = 'Success! Course offering inserted';
                 clearResultDiv();
+                clearInputs();
                 courseOfferingsDropdown();
             });
         }
@@ -131,7 +157,7 @@ async function courseExists(courseID) {
     });
 }
 
-async function primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum) { 
+async function primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum) {
     let data = {
         query: `select * from course_offering where
         course_id = '${courseID}'
@@ -246,6 +272,10 @@ async function deleteCourseOffering() {
         teuValue = null;
     }
 
+    if (courseID === 'NIL000') {
+        courseType = document.getElementById('nilDescription').value;
+    }
+
     if (await fullCourseOfferingExists(courseID, courseType, semester, year, sectionNum, numCredits, teuValue)) {
         let data;
         if (numCredits === null && teuValue === null) {
@@ -309,6 +339,7 @@ async function deleteCourseOffering() {
             }
             document.getElementById('result').innerHTML = 'Success! Course offering deleted';
             clearResultDiv();
+            clearInputs();
             courseOfferingsDropdown();
         });
     } else {
@@ -366,6 +397,17 @@ function populateCoursesDropdown(data) {
 function coursesOnChange() {
     document.getElementById('course_id').readOnly = true;
     let selectedCourse = JSON.parse(document.getElementById('coursesSelect').value);
+    if (selectedCourse.course_id === 'NIL000') {
+        document.getElementById('nilDescriptionLabel').hidden = false;
+        document.getElementById('nilDescription').hidden = false;
+        document.getElementById('nilDescription').value = '';
+    } else {
+        document.getElementById('nilDescriptionLabel').hidden = true;
+        document.getElementById('nilDescription').hidden = true;
+        document.getElementById('nilDescription').value = '';
+        document.getElementById('course_type').selectedIndex = 0;
+    }
+
     let data;
     if (selectedCourse.num_credits === null && selectedCourse.dept_name === null) {
         data = {
@@ -472,6 +514,16 @@ function courseOfferingsOnChange() {
     document.getElementById('course_id').readOnly = true;
     let selectedCourseOffering = JSON.parse(document.getElementById('courseOfferingsSelect').value);
 
+    if (selectedCourseOffering.course_id === 'NIL000') {
+        document.getElementById('nilDescriptionLabel').hidden = false;
+        document.getElementById('nilDescription').hidden = false;
+        document.getElementById('nilDescription').value = selectedCourseOffering.course_type;
+    } else {
+        document.getElementById('nilDescriptionLabel').hidden = true;
+        document.getElementById('nilDescription').hidden = true;
+        document.getElementById('nilDescription').value = '';
+    }
+
     document.getElementById('course_id').value = selectedCourseOffering.course_id;
     switch (selectedCourseOffering.course_type) {
         case 'InPerson':
@@ -524,6 +576,9 @@ function clearInputs() {
     document.getElementById('section_num').value = 1;
     document.getElementById('num_credits').value = 0;
     document.getElementById('teu').value = 3.4;
+    document.getElementById('nilDescriptionLabel').hidden = true;
+    document.getElementById('nilDescription').hidden = true;
+    document.getElementById('nilDescription').value = '';
 }
 
 function clearResultDiv() {
