@@ -10,7 +10,7 @@ window.onload = () => {
     document.getElementById('targetLoads').onclick = targetLoads;
     document.getElementById('clearReport').onclick = clearReport;
 
-    courseOfferingsDropDown().then(() => offeringOnChange());
+    courseOfferingsDropDown().then(() => courseOfferingOnChange());
     instructorDropdown().then(() => instructorOnChange());
 }
 
@@ -205,7 +205,7 @@ function assign() {
             return;
         }
         instructorOnChange();
-        offeringOnChange();
+        courseOfferingOnChange();
     });
 }
 
@@ -246,7 +246,7 @@ function unassign() {
             clearResultDiv();
         }
         instructorOnChange();
-        offeringOnChange();
+        courseOfferingOnChange();
     });
 }
 
@@ -281,7 +281,7 @@ function populateOfferingDropdown(data) {
         selectDropdown.setAttribute('id', 'offeringsSelect');
         document.getElementById('offerings').appendChild(selectDropdown);
     }
-    selectDropdown.onchange = offeringOnChange;
+    selectDropdown.onchange = courseOfferingOnChange;
     //clear any options in the select dropdown if present
     for (let i = selectDropdown.length - 1; i >= 0; i--) {
         selectDropdown.remove(i);
@@ -342,7 +342,7 @@ function populateInstructorDropdown(data) {
     }
 }
 
-function offeringOnChange() {
+function courseOfferingOnChange() {
     clearReport();
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let data = {

@@ -81,7 +81,7 @@ router.post('/page4', async function (req, res) {
 router.post('/page5', async function (req, res) {
 	let body = req.body;
 	try {
-		let answer = await makeQuery(connection, 'select course_id, title, dept_name from course');
+		let answer = await makeQuery(connection, body.query);
 		res.status(200).send(answer);
 	} catch (err) {
 		res.status(400).send(err.message);

@@ -12,7 +12,7 @@ function constructTable(selector, list) {
               
             // If there is any key, which is matching 
             // with the column name 
-            if (val == null) val = "";   
+            if (val == null) val = "NULL";   
                 row.append($('<td/>').html(val)); 
         } 
           

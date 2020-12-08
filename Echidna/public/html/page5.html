@@ -1,24 +1,48 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Assign courses to timeslots</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <link rel="icon" type="image/jpg" href="../echidna.jpg"/>
-        <script src="../js/table.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
-        <script src="../js/page5.js"></script>
-    </head>
-    <body>
-        <button onclick="window.location.href='/'">
-            Home
-        </button>
-        <br/>
-        <button type="button" id='button'>Get all courses</button>
 
-        <!-- TODO list courses with filter functionality -->
-        
-        <div id="result"></div>
-    </body>
+<head>
+    <title>Assign courses to timeslots</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="icon" type="image/jpg" href="../echidna.jpg" />
+    <script src="../js/table.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="../js/page5.js"></script>
+</head>
+
+<body>
+    <button onclick="window.location.href='/'">Home</button>
+    <br />
+
+    <button type="button" id="assign" style="margin-top: 10px;">Assign/Overwrite Timeslot to Course Offering</button>
+    <button type="button" id="unassign" style="margin-top: 10px;">Un-Assign Timeslot from Course Offering</button>
+
+    <div id="result"></div>
+
+    <div style="margin-top: 10px;">
+        <label for="timeslots">Time Slots:</label>
+        <span id="timeslots"></span>
+        <br />
+        <label for="assignedCourses">Course Offering(s) at this time:</label>
+        <div id="assignedCourses"></div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label for="courseOfferings">Course Offerings:</label>
+        <span id="courseOfferings"></span>
+        <br />
+        <label for="assignedTimeslot">Time slot this course offering is assigned to:</label>
+        <div id="assignedTimeslot"></div>
+    </div>
+
+    <button type="button" id="unassignedCourses" style="margin-top: 20px;">Show courses not assigned to timeslots</button>
+    <button type="button" id="assignedTimes">Show assigned timeslots for course offerings</button>
+    <button type="button" id="instructorTimes">Show when instructors are teaching</button>
+    <button type="button" id="clearReport">Clear Report</button>
+
+    <div id="report"></div>
+</body>
+
 </html>
