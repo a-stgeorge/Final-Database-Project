@@ -11,6 +11,7 @@ window.onload = () => {
 }
 
 //TODO handle non instructional load (needs to allow for entering into course type)
+// disable section number when adding NIL
 async function addCourseOffering() {
     let courseID = document.getElementById('course_id').value;
     let courseType = document.getElementById('course_type').value;
@@ -18,23 +19,66 @@ async function addCourseOffering() {
     let year = document.getElementById('year').value;
     let sectionNum = document.getElementById('section_num').value;
     let numCredits = document.getElementById('num_credits').value;
+    if (numCredits === '') {
+        numCredits = null;
+    }
     let teuValue = document.getElementById('teu').value;
+    if (teuValue === '') {
+        teuValue = null;
+    }
     
     if (await courseExists(courseID)) {
         if (await primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum)) {
             document.getElementById('result').innerHTML = 'Cannot add course offering, it already exists';
             clearResultDiv();    
         } else {
-            let data = {
-                query: `insert into course_offering values (
-                '${courseID}',
-                '${courseType}',
-                '${semester}', 
-                ${year},
-                ${sectionNum},
-                ${numCredits},
-                ${teuValue})`
-            };
+            let data;
+            if (numCredits === null && teuValue === null) {
+                data = {
+                    query: `insert into course_offering values (
+                    '${courseID}',
+                    '${courseType}',
+                    '${semester}', 
+                    ${year},
+                    ${sectionNum},
+                    NULL,
+                    NULL)`
+                };
+            } else if (numCredits === null) {
+                data = {
+                    query: `insert into course_offering values (
+                    '${courseID}',
+                    '${courseType}',
+                    '${semester}', 
+                    ${year},
+                    ${sectionNum},
+                    NULL,
+                    ${teuValue})`
+                };
+            } else if (teuValue === null) {
+                data = {
+                    query: `insert into course_offering values (
+                    '${courseID}',
+                    '${courseType}',
+                    '${semester}', 
+                    ${year},
+                    ${sectionNum},
+                    ${numCredits},
+                    NULL)`
+                };
+            } else {
+                data = {
+                    query: `insert into course_offering values (
+                    '${courseID}',
+                    '${courseType}',
+                    '${semester}', 
+                    ${year},
+                    ${sectionNum},
+                    ${numCredits},
+                    ${teuValue})`
+                };
+            }
+
             return fetch('/action/page3', {
                 method: 'POST',
                 headers: {
@@ -118,17 +162,53 @@ async function primaryKeyCourseOfferingExists(courseID, courseType, semester, ye
     });
 }
 
-async function fullCourseOfferingExists(courseID, courseType, semester, year, sectionNum, numCredits, teuValue) { 
-    let data = {
-        query: `select * from course_offering where
-        course_id = '${courseID}'
-        and course_type = '${courseType}'
-        and semester = '${semester}'
-        and year = '${year}'
-        and section_num = '${sectionNum}'
-        and num_credits = '${numCredits}'
-        and TEU_value = '${teuValue}'`
-    };
+async function fullCourseOfferingExists(courseID, courseType, semester, year, sectionNum, numCredits, teuValue) {
+    let data;
+    if (numCredits === null && teuValue === null) {
+        data = {
+            query: `select * from course_offering where
+            course_id = '${courseID}'
+            and course_type = '${courseType}'
+            and semester = '${semester}'
+            and year = '${year}'
+            and section_num = '${sectionNum}'
+            and num_credits is NULL
+            and TEU_value is NULL`
+        };
+    } else if (numCredits === null) {
+        data = {
+            query: `select * from course_offering where
+            course_id = '${courseID}'
+            and course_type = '${courseType}'
+            and semester = '${semester}'
+            and year = '${year}'
+            and section_num = '${sectionNum}'
+            and num_credits is NULL
+            and TEU_value = '${teuValue}'`
+        };
+    } else if (teuValue === null) {
+        data = {
+            query: `select * from course_offering where
+            course_id = '${courseID}'
+            and course_type = '${courseType}'
+            and semester = '${semester}'
+            and year = '${year}'
+            and section_num = '${sectionNum}'
+            and num_credits = '${numCredits}'
+            and TEU_value is NULL`
+        };
+    } else {
+        data = {
+            query: `select * from course_offering where
+            course_id = '${courseID}'
+            and course_type = '${courseType}'
+            and semester = '${semester}'
+            and year = '${year}'
+            and section_num = '${sectionNum}'
+            and num_credits = '${numCredits}'
+            and TEU_value = '${teuValue}'`
+        };
+    }
     return fetch('/action/page3', {
         method: 'POST',
         headers: {
@@ -158,19 +238,61 @@ async function deleteCourseOffering() {
     let year = document.getElementById('year').value;
     let sectionNum = document.getElementById('section_num').value;
     let numCredits = document.getElementById('num_credits').value;
+    if (numCredits === '') {
+        numCredits = null;
+    }
     let teuValue = document.getElementById('teu').value;
+    if (teuValue === '') {
+        teuValue = null;
+    }
 
     if (await fullCourseOfferingExists(courseID, courseType, semester, year, sectionNum, numCredits, teuValue)) {
-        let data = {
-            query: `delete from course_offering where
-            course_id = '${courseID}'
-            and course_type = '${courseType}'
-            and semester = '${semester}'
-            and year = '${year}'
-            and section_num = '${sectionNum}'
-            and num_credits = '${numCredits}'
-            and TEU_value = '${teuValue}'`
-        };
+        let data;
+        if (numCredits === null && teuValue === null) {
+            data = {
+                query: `delete from course_offering where
+                course_id = '${courseID}'
+                and course_type = '${courseType}'
+                and semester = '${semester}'
+                and year = '${year}'
+                and section_num = '${sectionNum}'
+                and num_credits is NULL
+                and TEU_value is NULL`
+            };
+        } else if (numCredits === null) {
+            data = {
+                query: `delete from course_offering where
+                course_id = '${courseID}'
+                and course_type = '${courseType}'
+                and semester = '${semester}'
+                and year = '${year}'
+                and section_num = '${sectionNum}'
+                and num_credits is NULL
+                and TEU_value = '${teuValue}'`
+            };
+        } else if (teuValue === null) {
+            data = {
+                query: `delete from course_offering where
+                course_id = '${courseID}'
+                and course_type = '${courseType}'
+                and semester = '${semester}'
+                and year = '${year}'
+                and section_num = '${sectionNum}'
+                and num_credits = '${numCredits}'
+                and TEU_value is NULL`
+            };
+        } else {
+            data = {
+                query: `delete from course_offering where
+                course_id = '${courseID}'
+                and course_type = '${courseType}'
+                and semester = '${semester}'
+                and year = '${year}'
+                and section_num = '${sectionNum}'
+                and num_credits = '${numCredits}'
+                and TEU_value = '${teuValue}'`
+            };
+        }
         return fetch('/action/page3', {
             method: 'POST',
             headers: {
@@ -243,14 +365,41 @@ function populateCoursesDropdown(data) {
 
 function coursesOnChange() {
     document.getElementById('course_id').readOnly = true;
-    let selectedcourse = JSON.parse(document.getElementById('coursesSelect').value);
-    let data = {
-        query: `select * from course where 
-        course_id = '${selectedcourse.course_id}'
-        and title = '${selectedcourse.title}'
-        and dept_name = '${selectedcourse.dept_name}'
-        and num_credits = '${selectedcourse.num_credits}'`
-    };
+    let selectedCourse = JSON.parse(document.getElementById('coursesSelect').value);
+    let data;
+    if (selectedCourse.num_credits === null && selectedCourse.dept_name === null) {
+        data = {
+            query: `select * from course where 
+            course_id = '${selectedCourse.course_id}'
+            and title = '${selectedCourse.title}'
+            and dept_name is NULL
+            and num_credits is NULL`
+        };
+    } else if (selectedCourse.num_credits === null) {
+        data = {
+            query: `select * from course where 
+            course_id = '${selectedCourse.course_id}'
+            and title = '${selectedCourse.title}'
+            and dept_name = '${selectedCourse.dept_name}'
+            and num_credits is NULL`
+        };
+    } else if (selectedCourse.dept_name === null) {
+        data = {
+            query: `select * from course where 
+            course_id = '${selectedCourse.course_id}'
+            and title = '${selectedCourse.title}'
+            and dept_name = is NULL
+            and num_credits = '${selectedCourse.num_credits}'`
+        };
+    } else {
+        data = {
+            query: `select * from course where 
+            course_id = '${selectedCourse.course_id}'
+            and title = '${selectedCourse.title}'
+            and dept_name = '${selectedCourse.dept_name}'
+            and num_credits = '${selectedCourse.num_credits}'`
+        };
+    }
     fetch('/action/page3', {
         method: 'POST',
         headers: {
@@ -268,7 +417,7 @@ function coursesOnChange() {
         document.getElementById('course_id').value = responseJson[0].course_id;
         document.getElementById('num_credits').value = responseJson[0].num_credits;
         if (responseJson[0].course_id === 'NIL000') {
-            document.getElementById('course_type').selectedIndex = 3;
+            document.getElementById('course_type').selectedIndex = 2;
         }
     });
 }
@@ -354,8 +503,16 @@ function courseOfferingsOnChange() {
 
     document.getElementById('year').value = selectedCourseOffering.year;
     document.getElementById('section_num').value = selectedCourseOffering.section_num;
-    document.getElementById('num_credits').value = selectedCourseOffering.num_credits;
-    document.getElementById('teu').value = selectedCourseOffering.TEU_value;
+    if (selectedCourseOffering.num_credits === null) {
+        document.getElementById('num_credits').value = '';
+    } else {
+        document.getElementById('num_credits').value = selectedCourseOffering.num_credits;
+    }
+    if (selectedCourseOffering.TEU_value === null) {
+        document.getElementById('teu').value = '';
+    } else {
+        document.getElementById('teu').value = selectedCourseOffering.TEU_value;
+    }
 }
 
 function clearInputs() {
