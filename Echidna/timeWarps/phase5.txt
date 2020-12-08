@@ -33,6 +33,9 @@ insert into mod_table values('BB', '13:00:00', '15:45:00', 3, 'MTWRF');
 insert into mod_table values ('OL', null, null, 3, null);
 insert into mod_table values ('OL', null, null, 4, null);
 
+/*CLEAR TEACHES FROM PHASE 4 VALUES*/
+delete from teaches; 
+
 /* TEACHES INSERTS */
 
 insert into teaches values(10000001, 'COS100', 'InPerson', 'fall', 2020, 1, 'A', 3);
