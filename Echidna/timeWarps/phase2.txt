@@ -45,4 +45,4 @@ insert into course values('MAT330', 'Probability and Statistics', 'MathCs', 3, N
 insert into course values('MAT376', 'Operations Research', 'MathCs', 3, NULL);
 insert into course values('MAT422', 'Real Analysis', 'MathCs', 4, NULL);
 insert into course values('MAT499', 'Foundations of Mathematics', 'MathCs', 3, NULL);
-insert into course values('NIL000', 'Non-Instructional Load', 'General', NULL, NULL);
+insert into course values('NIL000', 'Non-Instructional Load', 'General', 0, NULL);
