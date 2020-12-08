@@ -1,3 +1,4 @@
+
 drop trigger if exists instructor_schedule_check;
 drop trigger if exists interim_mod_check;
 drop trigger if exists section_increment;
@@ -13,83 +14,90 @@ drop table if exists mod_table;
 SET storage_engine=InnoDB;
 
 
-create table course
-	(course_id		varchar(6) not null, 
-	 title			varchar(50) not null, 
-	 dept_name		varchar(20),
-	num_credits		decimal(2,1) check (num_credits >= 0),
-	cluster_id		integer,
-	 primary key (course_id)
-	);
+/* TABLES */
+
+
+create table course (
+	course_id			varchar(6) not null, 
+	title				varchar(50) not null, 
+	dept_name			varchar(20),
+	num_credits			decimal(2,1) check (num_credits >= 0),
+	cluster_id			integer,
+
+	primary key (course_id)
+);
+
 create index course_credits on course(course_id, num_credits);
 
-create table instructor
-	(instructor_id			decimal(8,0) check (instructor_id >= 0), 
-	 first_name			varchar(50) not null, 
- last_name			varchar(50) not null, 
- email 			varchar(60) not null,
-	 dept_name		varchar(20) not null, 
+create table instructor (
+	instructor_id			decimal(8,0) check (instructor_id >= 0), 
+	first_name				varchar(50) not null, 
+ 	last_name				varchar(50) not null, 
+ 	email 					varchar(60) not null,
+	dept_name				varchar(20) not null, 
 	desired_load_min		decimal(3,1) not null check (desired_load_min >= 0),
 	desired_load_max		decimal(3,1) not null check (desired_load_max >= desired_load_min),
-	 primary key (instructor_id)
-	);
 
-create table course_offering 
-(course_id 			varchar(6) not null, 
-course_type 			varchar(50) not null, 
-semester 			enum('Fall','Interim','Spring', 'Summer'), 
-year 				decimal(4,0) not null check (year >= 1776), 
-section_num 			integer check (section_num >= 0), 
-num_credits 			decimal(2,1), 
-TEU_value 			decimal(3,1) check (TEU_value >=0),
+	primary key (instructor_id)
+);
+
+create table course_offering (
+	course_id 				varchar(6) not null, 
+	course_type 			varchar(50) not null, 
+ 	semester 				enum('Fall','Interim','Spring', 'Summer'), 
+ 	year 					decimal(4,0) not null check (year >= 1776), 
+	section_num 			integer check (section_num >= 0), 
+	num_credits 			decimal(2,1), 
+	TEU_value 				decimal(3,1) check (TEU_value >=0),
  
-primary key (course_id, course_type, semester, year, section_num), 
-foreign key(course_id, num_credits) references course(course_id, num_credits) on update cascade);
-
-
-create table mod_table
-	(mod_name		varchar(3) not null,
-	start_time		time(0),
-end_time		time(0),
-mod_credits		decimal(1, 0) check (mod_credits >= 3 and mod_credits <= 4),
-days_of_week		varchar(5),
-primary key (mod_name, mod_credits)
+	primary key (course_id, course_type, semester, year, section_num), 
+	foreign key(course_id, num_credits) references course(course_id, num_credits) on update cascade
 );
 
 
-create table teaches 
+create table mod_table (
+	mod_name			varchar(3) not null,
+	start_time			time(0),
+	end_time			time(0),
+	mod_credits			decimal(1, 0) check (mod_credits >= 3 and mod_credits <= 4),
+	days_of_week		varchar(5),
 
-(instructor_id 			decimal(8,0) check (instructor_id >= 0), 
-course_id 			varchar(6) not null, 
-course_type 			varchar(50) not null, 
-semester 			enum('fall','interim','spring', 'summer'), 
-year 				decimal (4,0) check (year >= 1776), 
-section_num 			integer, 
-mod_name 			varchar(3), 
-mod_credits 			decimal(1, 0) check (mod_credits >= 3 and mod_credits <= 4), 
-
-primary key(instructor_id, course_id, course_type, semester, year, section_num), 
-foreign key fk1 (course_id, course_type, semester, year, section_num) 
-references course_offering (course_id, course_type, semester, year, section_num) on update cascade on delete cascade, 
-foreign key fk2 (instructor_id) references instructor (instructor_id) on update cascade on delete cascade, 
-foreign key fk3  (mod_name, mod_credits) references mod_table (mod_name, mod_credits) on update cascade on delete set null);
+	primary key (mod_name, mod_credits)
+);
 
 
+create table teaches ()
+	instructor_id 		decimal(8,0) check (instructor_id >= 0), 
+	course_id 			varchar(6) not null, 
+	course_type 		varchar(50) not null, 
+	semester 			enum('fall','interim','spring', 'summer'), 
+	year 				decimal (4,0) check (year >= 1776), 
+	section_num 		integer, 
+	mod_name 			varchar(3), 
+	mod_credits 		decimal(1, 0) check (mod_credits >= 3 and mod_credits <= 4), 
+
+	primary key(instructor_id, course_id, course_type, semester, year, section_num), 
+	foreign key fk1 (course_id, course_type, semester, year, section_num) 
+	references course_offering (course_id, course_type, semester, year, section_num) on update cascade on delete cascade, 
+	foreign key fk2 (instructor_id) references instructor (instructor_id) on update cascade on delete cascade, 
+	foreign key fk3  (mod_name, mod_credits) references mod_table (mod_name, mod_credits) on update cascade on delete set null
+);
+
+
+/* TRIGGERS */
 
 
 create trigger interim_mod_check after insert on teaches
 for each row BEGIN
 	if (NEW.mod_name = 'AA' and NEW.semester != 'Interim')
 	then
-            	signal sqlstate value '45000';
+        signal sqlstate value '45000' set message_text = 'AA mod must be in interim!';
 	elseif (NEW.mod_name = 'BB' and NEW.semester != 'Interim')
 	then
-        		signal sqlstate value '45000';
-	elseif (NEW.semester = 'Interim' and
-(NEW.mod_name != 'AA' and NEW.mod_name != 'BB'
-and NEW.mod_name != 'OL'))
+        signal sqlstate value '45000' set message_text = 'BB mod must be in interim!';
+	elseif (NEW.semester = 'Interim' and (NEW.mod_name != 'AA' and NEW.mod_name != 'BB' and NEW.mod_name != 'OL'))
 	then
-    		signal sqlstate value '45000';
+    	signal sqlstate value '45000' set message_text = 'Interim course must have mod AA, BB, or OL!';
 	end if;
 end ;
 
@@ -101,35 +109,4 @@ for each row BEGIN
 		signal sqlstate value '45000' set message_text =  'Instructor has been double scheduled!';
 	end if;
 end ;
-
-create trigger section_increment before insert on course_offering
-for each row BEGIN
-	while ( (NEW.course_id, NEW.course_type, NEW.semester, NEW.year, NEW.section_num) in (select course_id, course_type, semester, year, section_num from course_offering) )
-	do
-		set NEW.section_num = NEW.section_num + 1;
-	end while;
-end ;
-
-
-
-create trigger instructor_id_increment before insert on instructor
-for each row BEGIN
-	while ( (NEW.instructor_id) in (select instructor_id from instructor) )
-	do
-		set NEW.instructor_id = NEW.instructor_id + 1;
-	end while;
-end ;
-
-create trigger cluster_increment before insert on course
-for each row BEGIN
-    if (NEW.cluster_id is not null)
-    then
-        while ( (NEW.cluster_id) in (select cluster_id from course) )
-		do
-			set NEW.cluster_id = NEW.cluster_id + 1;
-		end while;
-	end if;
-end ;
-
-
 
