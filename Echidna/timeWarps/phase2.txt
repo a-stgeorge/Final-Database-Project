@@ -1,4 +1,4 @@
-/ * INSTRUCTORS */
+/* INSTRUCTORS */
 
 insert into instructor values(10000001, 'John', 'Smith', 'jsmith@college.edu', 'MathCs', 23.5, 23.8);
 insert into instructor values(10000002, 'Joe', 'Biden', 'jbiden@college.edu', 'MathCs', 23.5, 23.8);

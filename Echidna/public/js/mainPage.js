@@ -19,7 +19,7 @@ async function timeWarp1() {
 }
 
 async function timeWarp2() {
-    timeWarp1().then(() => {
+    return timeWarp1().then(() => {
         fetch('/action/timeWarp/2', { method: 'POST' }).then(async response => {
             if (!response.ok) {
                 let responseMessage = await response.text();
@@ -33,7 +33,7 @@ async function timeWarp2() {
 }
 
 async function timeWarp3() {
-    timeWarp1().then(() => {
+    return timeWarp2().then(() => {
         fetch('/action/timeWarp/3', { method: 'POST' }).then(async response => {
             if (!response.ok) {
                 let responseMessage = await response.text();
@@ -44,10 +44,11 @@ async function timeWarp3() {
                 'Time Warp 3 was a success. At least 10 instructors, at least 30 courses, and at least 70 course offerings were added.';
         });
     });
+    console.log("Ending 3");
 }
 
 async function timeWarp4() {
-    timeWarp1().then(() => {
+    return timeWarp3().then(() => {
         fetch('/action/timeWarp/4', { method: 'POST' }).then(async response => {
             if (!response.ok) {
                 let responseMessage = await response.text();
@@ -62,7 +63,7 @@ async function timeWarp4() {
 }
 
 async function timeWarp5() {
-    timeWarp1().then(() => {
+    return timeWarp3().then(() => {
         fetch('/action/timeWarp/5', { method: 'POST' }).then(async response => {
             if (!response.ok) {
                 let responseMessage = await response.text();

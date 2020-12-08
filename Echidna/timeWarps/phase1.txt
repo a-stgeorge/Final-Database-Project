@@ -66,7 +66,7 @@ create table mod_table (
 );
 
 
-create table teaches ()
+create table teaches (
 	instructor_id 		decimal(8,0) check (instructor_id >= 0), 
 	course_id 			varchar(6) not null, 
 	course_type 		varchar(50) not null, 
