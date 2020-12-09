@@ -264,7 +264,7 @@ async function deleteCourseOffering() {
                 and semester = '${semester}'
                 and year = '${year}'
                 and section_num = '${sectionNum}'
-                and num_credits = '${numCredits}'sx
+                and num_credits = '${numCredits}'
                 and TEU_value is NULL`
             };
         } else {
