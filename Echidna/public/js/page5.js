@@ -11,6 +11,7 @@ window.onload = () => {
 }
 
 //TODO make sure triggers catch what they are supposed to!!! (I don't think they worked)
+//TODO courses not assigned report doesn't include offerings not in teaches
 
 function assign() {
     let selectedTimeSlot = JSON.parse(document.getElementById('timeslotsSelect').value);
@@ -40,8 +41,8 @@ function assign() {
             return;
         }
         let responseJson = await response.json();
-        if (responseJson.length === 0) {
-            document.getElementById('result').innerHTML = 'No updates made...';
+        if (responseJson.affectedRows === 0) {
+            document.getElementById('result').innerHTML = 'No updates made... (no instructor teaching this course offering)';
             clearResultDiv();
             return;
         }
@@ -79,8 +80,9 @@ function unassign() {
             return;
         }
         let responseJson = await response.json();
-        if (responseJson.length === 0) {
-            document.getElementById('result').innerHTML = 'No updates made...';
+        if (responseJson.affectedRows === 0) {
+            document.getElementById('result').innerHTML = `No updates made... (no instructor teaching this course offering)
+            (or this offering was already not assigned to a time slot)`;
             clearResultDiv();
             return;
         }
