@@ -33,25 +33,25 @@ router.post('/timeWarp/:timeWarpNum', async function (req, res) {
 				timeWarpString = fs.readFileSync(__dirname + `/../timeWarps/phase1.txt`, 'utf8');
 				break;
 			case 2:
-				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
+				timeWarpString = fs.readFileSync(__dirname + `/../timeWarps/phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase2.txt`, 'utf8');
 				break;
 			case 3:
-				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase3.txt`, 'utf8');
+				timeWarpString = fs.readFileSync(__dirname + `/../timeWarps/phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase2.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase3.txt`, 'utf8');
 				break;
 			case 4:
-				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase3.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase4.txt`, 'utf8');
+				timeWarpString = fs.readFileSync(__dirname + `/../timeWarps/phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase2.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase3.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase4.txt`, 'utf8');
 				break;
 			case 5:
-				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase3.txt`, 'utf8');
-				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase5.txt`, 'utf8');
+				timeWarpString = fs.readFileSync(__dirname + `/../timeWarps/phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase2.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase3.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `/../timeWarps/phase5.txt`, 'utf8');
 				break;
 		}
 		let answer = await makeQuery(connection, timeWarpString);
