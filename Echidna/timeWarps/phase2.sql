@@ -13,7 +13,6 @@ insert into instructor values(10000010, 'Sally', 'Smith', 'ssmith@college.edu', 
 
 /* COURSES */
 
-
 insert into course values('COS100', 'Intro to Programming', 'MathCs', 3);
 insert into course values('COS105', 'Object-oriented Design and Programming', 'MathCs', 4);
 insert into course values('COS205', 'Scientific Computing', 'MathCs', 3);

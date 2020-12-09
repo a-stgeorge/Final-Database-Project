@@ -8,6 +8,7 @@ drop trigger if exists update_online_mod;
 
 drop table if exists teaches;
 drop table if exists course_offering;
+drop table if exists cluster;
 drop table if exists course;
 drop table if exists instructor;
 drop table if exists mod_table;
@@ -42,7 +43,7 @@ create table course (
 create index course_credits on course(course_id, num_credits);
 
 create table cluster (
-	cluster_id			integer not null check (cluster_id),
+	cluster_id			integer not null check (cluster_id >= 0),
 	course_id			varchar(6) not null,
 
 	primary key (cluster_id, course_id),

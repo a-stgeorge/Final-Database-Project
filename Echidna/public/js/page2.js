@@ -55,8 +55,7 @@ async function addCourse() {
                 '${courseId}',
                 '${courseTitle}',
                 NULL,
-                '${numCredits}',
-                NULL)`
+                '${numCredits}')`
         };
     } else {
         data = {
@@ -64,8 +63,7 @@ async function addCourse() {
                 '${courseId}',
                 '${courseTitle}',
                 '${department}',
-                '${numCredits}',
-                NULL)`
+                '${numCredits}')`
         };
     }
 
