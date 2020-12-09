@@ -49,31 +49,13 @@ async function addCourse() {
     }
 
     let data;
-    if (department === null && numCredits === null) {
-        data = {
-            query: `insert into course values (
-                '${courseId}',
-                '${courseTitle}',
-                NULL,
-                NULL,
-                NULL)`
-        };
-    } else if (department === null) {
+    if (department === null) {
         data = {
             query: `insert into course values (
                 '${courseId}',
                 '${courseTitle}',
                 NULL,
                 '${numCredits}',
-                NULL)`
-        };
-    } else if (numCredits === null) {
-        data = {
-            query: `insert into course values (
-                '${courseId}',
-                '${courseTitle}',
-                '${department}',
-                NULL,
                 NULL)`
         };
     } else {
@@ -116,31 +98,13 @@ async function addCourse() {
 async function overwriteFlow(courseId, courseTitle, department, numCredits) {
     if (confirm('ID already exists. Would you like to overwrite this course with the values you provided?')) {
         let data;
-        if (department === null && numCredits === null) {
-            data = {
-                query: `update course set
-                course_id = '${courseId}',
-                title = '${courseTitle}',
-                dept_name = NULL,
-                num_credits = NULL
-                where course_id = '${courseId}'`
-            };
-        } else if (department === null) {
+        if (department === null) {
             data = {
                 query: `update course set
                 course_id = '${courseId}',
                 title = '${courseTitle}',
                 dept_name = NULL,
                 num_credits = '${numCredits}'
-                where course_id = '${courseId}'`
-            };
-        } else if (numCredits === null) {
-            data = {
-                query: `update course set
-                course_id = '${courseId}',
-                title = '${courseTitle}',
-                dept_name = '${department}',
-                num_credits = NULL
                 where course_id = '${courseId}'`
             };
         } else {
@@ -225,7 +189,7 @@ function coursesOnChange() {
     let selectedcourse = JSON.parse(document.getElementById('coursesSelect').value);
     
     let data; 
-    if (selectedcourse.dept_name === null && selectedcourse.num_credits === null) {
+    if (selectedcourse.dept_name === null) {
         data = {
             query: `select * from course where 
             course_id = '${selectedcourse.course_id}'
@@ -233,22 +197,6 @@ function coursesOnChange() {
             and dept_name is NULL
             and num_credits is NULL`
         }; 
-    } else if (selectedcourse.dept_name === null) {
-        data = {
-            query: `select * from course where 
-            course_id = '${selectedcourse.course_id}'
-            and title = '${selectedcourse.title}'
-            and dept_name is NULL
-            and num_credits = '${selectedcourse.num_credits}'`
-        };
-    } else if (selectedcourse.num_credits === null) {
-        data = {
-            query: `select * from course where 
-            course_id = '${selectedcourse.course_id}'
-            and title = '${selectedcourse.title}'
-            and dept_name = '${selectedcourse.dept_name}'
-            and num_credits is NULL`
-        };
     } else {
         data = {
             query: `select * from course where 
