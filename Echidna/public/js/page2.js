@@ -113,7 +113,7 @@ async function overwriteFlow(courseId, courseTitle, department, numCredits) {
                 course_id = '${courseId}',
                 title = '${courseTitle}',
                 dept_name = '${department}',
-                num_credits = '${numCredits}',
+                num_credits = '${numCredits}'
                 where course_id = '${courseId}'`
             };
         }

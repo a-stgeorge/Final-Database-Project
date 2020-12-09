@@ -198,7 +198,7 @@ async function fullCourseOfferingExists(courseID, courseType, semester, year, se
             and semester = '${semester}'
             and year = '${year}'
             and section_num = '${sectionNum}'
-            and num_credits is '${numCredits}'
+            and num_credits = '${numCredits}'
             and TEU_value is NULL`
         };
     } else {
