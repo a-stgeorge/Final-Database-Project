@@ -23,14 +23,37 @@ async function checkConnection(req, res, next) {
 
 router.use(checkConnection);
 
-//TODO note that even these post routes can be extracted further if they get too long, and they can be renamed
-//	to something more helpful
-
 const makeQuery = require('../query');
 
 router.post('/timeWarp/:timeWarpNum', async function (req, res) {
+	let timeWarpString;
 	try {
-		let timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase${req.params.timeWarpNum}.txt`, 'utf8');
+		switch (parseInt(req.params.timeWarpNum)) {
+			case 1:
+				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
+				break;
+			case 2:
+				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
+				break;
+			case 3:
+				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase3.txt`, 'utf8');
+				break;
+			case 4:
+				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase3.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase4.txt`, 'utf8');
+				break;
+			case 5:
+				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase2.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase3.txt`, 'utf8');
+				timeWarpString += fs.readFileSync(__dirname + `\\..\\timeWarps\\phase5.txt`, 'utf8');
+				break;
+		}
 		let answer = await makeQuery(connection, timeWarpString);
 		res.status(200).send(answer);
 	} catch (err) {
