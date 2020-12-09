@@ -28,6 +28,8 @@ function courseTypeOnChange() {
     }
 }
 
+//TODO numCredits cannot be null, need to update corresponding spots in code
+
 async function addCourseOffering() {
     let courseID = document.getElementById('course_id').value;
     let courseType = document.getElementById('course_type').value;

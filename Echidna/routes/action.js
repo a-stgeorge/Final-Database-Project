@@ -30,7 +30,7 @@ router.post('/timeWarp/:timeWarpNum', async function (req, res) {
 	try {
 		switch (parseInt(req.params.timeWarpNum)) {
 			case 1:
-				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');
+				timeWarpString = fs.readFileSync(__dirname + `/../timeWarps/phase1.txt`, 'utf8');
 				break;
 			case 2:
 				timeWarpString = fs.readFileSync(__dirname + `\\..\\timeWarps\\phase1.txt`, 'utf8');

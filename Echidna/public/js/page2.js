@@ -21,6 +21,8 @@ function isValidCourseId(str) {
         && isInt(str.charAt(4)) && isInt(str.charAt(5));
 }
 
+//TODO numCredits cannot be null anymore, need to update all corresponding checks
+
 async function addCourse() {
     let courseId = document.getElementById('course_id').value.toUpperCase();
     let courseTitle = document.getElementById('title').value;
