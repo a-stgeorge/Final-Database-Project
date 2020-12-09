@@ -264,7 +264,7 @@ async function deleteCourseOffering() {
                 and semester = '${semester}'
                 and year = '${year}'
                 and section_num = '${sectionNum}'
-                and num_credits is '${numCredits}'
+                and num_credits = '${numCredits}'sx
                 and TEU_value is NULL`
             };
         } else {
@@ -371,7 +371,7 @@ function coursesOnChange() {
             course_id = '${selectedCourse.course_id}'
             and title = '${selectedCourse.title}'
             and dept_name is NULL
-            and num_credits is '${selectedCourse.num_credits}'`
+            and num_credits = '${selectedCourse.num_credits}'`
         };
     } else {
         data = {
