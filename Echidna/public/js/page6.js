@@ -5,7 +5,8 @@ window.onload = async () => {
     setMaxClusterID();
     
 
-    document.getElementById('create_cluster').onclick = create_cluster;
+    document.getElementById('create_cluster').onclick = createCluster;
+    document.getElementById('delete_clusters').onclick = deleteClusters;
     console.log('Page 6 boi');
 }
 
@@ -28,7 +29,6 @@ function setMaxClusterID(){
             return;
         }
         let responseJson = await response.json();
-        console.log(responseJson[0].max_cluster_num === null);
         if (responseJson[0].max_cluster_num === null){
             localStorage['current_cluster_id'] = 0;
         }
@@ -38,34 +38,39 @@ function setMaxClusterID(){
     });
 }
 
-async function create_cluster(){
+async function createCluster(){
     var checkboxes = document.getElementsByClassName('course_checkbox');
+    var selectedBoxes = Array.prototype.slice.call(checkboxes).filter(box => box.checked === true);
 
-    Array.from(checkboxes).forEach((box, i) => {
-            if(box.checked === true){
-                console.log(box.value);
-                let data = {
-                    query: `update course set cluster_id = ${localStorage['current_cluster_id']} where course_id = '${box.value}'`
-                };
-                fetch('/action/page6', 
-                { 
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                }).then(async response => {
-                    if (!response.ok) {
-                        let responseMessage = await response.text();
-                        document.getElementById('result').innerHTML = responseMessage;
-                        clearResultDiv();
-                        return;
-                    }
-                    let responseJson = await response.json();
-                    document.getElementById('result').innerHTML = 'Success!';
+    if(selectedBoxes.length <= 1){
+        document.getElementById('result').innerHTML = 'Select at least 2 courses to cluster';
+        clearResultDiv();
+        return;
+    }    
+    selectedBoxes.forEach((box, i) => {
+        if(box.checked === true){
+            let data = {
+                query: `update course set cluster_id = ${localStorage['current_cluster_id']} where course_id = '${box.value}'`
+            };
+            fetch('/action/page6', 
+            { 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(async response => {
+                if (!response.ok) {
+                    let responseMessage = await response.text();
+                    document.getElementById('result').innerHTML = responseMessage;
                     clearResultDiv();
-                });
-            }
+                    return;
+                }
+                let responseJson = await response.json();
+                document.getElementById('result').innerHTML = 'Success!';
+                clearResultDiv();
+            });
+        }
     });
     localStorage['current_cluster_id'] = parseInt(localStorage['current_cluster_id']) + 1;
     await getCourses();
@@ -142,10 +147,39 @@ function createCheckboxes(){
             input.classList.add('course_checkbox');
 
             var cell = document.createElement('td');
+            cell.classList.add('course_checkbox');
             cell.appendChild(input);
             row.appendChild(cell);
         }
     });
+}
+
+async function deleteClusters() {
+    let data = {
+        query: 'update course set cluster_id = Null'
+    };
+    fetch('/action/page6', 
+    { 
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
+            return;
+        }
+        let responseJson = await response.json();
+        document.getElementById('result').innerHTML = 'Success!';
+        clearResultDiv();
+    });
+    await getCourses();
+    createCheckboxes();
+    await getCourseClusters();
+    setMaxClusterID();
 }
 
 function clearResultDiv() {
