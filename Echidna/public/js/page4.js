@@ -1,5 +1,4 @@
 window.onload = () => {
-    console.log('Page 4 boi');
     document.getElementById('refreshDropdowns').onclick = refreshDropdowns;
     document.getElementById('assign').onclick = assign;
     document.getElementById('unassign').onclick = unassign;

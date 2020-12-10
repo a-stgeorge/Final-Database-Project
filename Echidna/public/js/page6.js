@@ -4,10 +4,8 @@ window.onload = async () => {
     await getCourseClusters();
     setMaxClusterID();
     
-
     document.getElementById('create_cluster').onclick = createCluster;
     document.getElementById('delete_clusters').onclick = deleteClusters;
-    console.log('Page 6 boi');
 }
 
 function setMaxClusterID(){

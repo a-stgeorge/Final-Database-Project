@@ -1,11 +1,70 @@
 window.onload = () => {
     document.getElementById('submit').onclick = addInstructor;
     document.getElementById('clearInputs').onclick = clearInputs;
+    document.getElementById('minPlus').onclick = minPlus;
+    document.getElementById('minMinus').onclick = minMinus;
+    document.getElementById('maxPlus').onclick = maxPlus;
+    document.getElementById('maxMinus').onclick = maxMinus;
+    document.getElementById('load_min').onchange = loadMinOnChange;
+    document.getElementById('load_max').onchange = loadMaxOnChange;
     document.getElementById('form').onsubmit = (e) => {
         e.preventDefault();
     };
-    coursesDropdown();
-    console.log('Page 1 boi');
+    instructorsDropdown();
+}
+
+function loadMinOnChange() {
+    let loadMin = document.getElementById('load_min');
+    let regex = RegExp(/^\d*\.?\d*$/);
+    if (regex.test(loadMin.value)) {
+        loadMin.setCustomValidity('');
+        loadMin.value = parseFloat(loadMin.value).toFixed(1);
+    } else {
+        loadMin.setCustomValidity('Invalid Number');
+    }
+}
+
+function loadMaxOnChange() {
+    let loadMax = document.getElementById('load_max');
+    let regex = RegExp(/^\d*\.?\d*$/);
+    if (regex.test(loadMax.value)) {
+        loadMax.setCustomValidity('');
+        loadMax.value = parseFloat(loadMax.value).toFixed(1);
+    } else {
+        loadMax.setCustomValidity('Invalid Number');
+    }
+}
+
+function minPlus() {
+    let minValue = document.getElementById('load_min');
+    if (parseFloat(minValue.value).toFixed(1) !== 'NaN'
+        && parseFloat(minValue.value) < 97.0) {
+        minValue.value = parseFloat(parseFloat(minValue.value) + 3.4).toFixed(1);
+    }
+}
+
+function minMinus() {
+    let minValue = document.getElementById('load_min');
+    if (parseFloat(minValue.value).toFixed(1) !== 'NaN'
+        && parseFloat(minValue.value) > 3.3) {
+        minValue.value = parseFloat(parseFloat(minValue.value) - 3.4).toFixed(1);
+    }
+}
+
+function maxPlus() {
+    let maxValue = document.getElementById('load_max');
+    if (parseFloat(maxValue.value).toFixed(1) !== 'NaN'
+        && parseFloat(maxValue.value) < 97.0) {
+        maxValue.value = parseFloat(parseFloat(maxValue.value) + 3.4).toFixed(1);
+    }
+}
+
+function maxMinus() {
+    let maxValue = document.getElementById('load_max');
+    if (parseFloat(maxValue.value).toFixed(1) !== 'NaN'
+        && parseFloat(maxValue.value) > 3.3) {
+        maxValue.value = parseFloat(parseFloat(maxValue.value) - 3.4).toFixed(1);
+    }
 }
 
 function clearInputs() {
@@ -66,7 +125,7 @@ async function addInstructor() {
         document.getElementById('result').innerHTML = 'Success!';
         clearResultDiv();
         clearInputs();
-        coursesDropdown();
+        instructorsDropdown();
     });
 }
 
@@ -98,12 +157,12 @@ async function overwriteFlow(instructorId, firstName, lastName, email, deptName,
             document.getElementById('result').innerHTML = 'Success! Instructor updated';
             clearResultDiv();
             clearInputs();
-            coursesDropdown();
+            instructorsDropdown();
         });
     }
 }
 
-function coursesDropdown() {
+function instructorsDropdown() {
     let data = {
         query: 'select instructor_id, first_name, last_name from instructor'
     };
@@ -123,18 +182,18 @@ function coursesDropdown() {
         }
         let responseJson = await response.json();
         clearResultDiv();
-        populateCoursesDropdown(responseJson);
+        populateInstructorsDropdown(responseJson);
     });
 }
 
-function populateCoursesDropdown(data) {
+function populateInstructorsDropdown(data) {
     let selectDropdown = document.getElementById('instructorsSelect');
     if (!selectDropdown) {
         selectDropdown = document.createElement('select');
         selectDropdown.setAttribute('id', 'instructorsSelect');
         document.getElementById('instructors').appendChild(selectDropdown);
     }
-    selectDropdown.onchange = coursesOnChange;
+    selectDropdown.onchange = instructorsOnChange;
     //clear any options in the select dropdown if present
     for (let i = selectDropdown.length - 1; i >= 0; i--) {
         selectDropdown.remove(i);
@@ -149,7 +208,7 @@ function populateCoursesDropdown(data) {
     }
 }
 
-function coursesOnChange() {
+function instructorsOnChange() {
     document.getElementById('instructor_id').readOnly = true;
     let selectedInstructor = JSON.parse(document.getElementById('instructorsSelect').value);
     let data = {
