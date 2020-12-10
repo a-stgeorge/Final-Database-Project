@@ -9,9 +9,7 @@ window.onload = () => {
     timeslotDropDown().then(() => timeslotOnChange());
 }
 
-//TODO make sure triggers catch what they are supposed to!!! (I don't think they worked)
-//TODO courses not assigned report doesn't include offerings not in teaches
-
+//TODO make sure triggers catch what they are supposed to!!!
 function assign() {
     let selectedTimeSlot = JSON.parse(document.getElementById('timeslotsSelect').value);
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
@@ -290,7 +288,7 @@ function timeslotOnChange() {
 
 function unassignedCourses() {
     let data = {
-        query: `select * from teaches where mod_name is NULL`
+        query: `select * from teaches natural right join course_offering where mod_name is NULL`
     };
     fetch('/action/page5', {
         method: 'POST',
