@@ -88,7 +88,14 @@ async function addInstructor() {
     let loadMax = document.getElementById('load_max').value;
     
     if (!document.getElementById('form').checkValidity()) {
-        document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) is bordered red.';
+        document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) bordered red.';
+        clearResultDiv();
+        return;
+    }
+
+    if (loadMin > loadMax) {
+        document.getElementById('result').innerHTML = `Bad data in form, desired load min must be smaller than 
+            desired load max.`;
         clearResultDiv();
         return;
     }

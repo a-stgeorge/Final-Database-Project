@@ -50,9 +50,14 @@ async function addCourseOffering() {
     }
 
     if (await courseExists(courseID)) {
-        if (await primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum)) {
+        if (await courseAndCreditsMatch(courseID, numCredits)) {
+            document.getElementById('result').innerHTML = 'Number of credits for course \'' + courseID + '\' does not match course';
+            clearResultDiv();
+            return;
+        } else if (await primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum)) {
             document.getElementById('result').innerHTML = 'Cannot add course offering, it already exists';
             clearResultDiv();
+            return;
         } else {
             let data;
             if (teuValue === null) {
@@ -126,6 +131,34 @@ async function courseExists(courseID) {
         }
         let responseJson = await response.json();
         if (responseJson.length === 0) {
+            return false;
+        }
+        return true;
+    });
+}
+
+async function courseAndCreditsMatch(courseID, numCredits) {
+    let data = {
+        query: `select * from course where
+        course_id = '${courseID}'
+        and num_credits = '${numCredits}'`
+    };
+    return fetch('/action/page3', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
+            return;
+        }
+        let responseJson = await response.json();
+        if (responseJson.length === 1) {
             return false;
         }
         return true;
