@@ -5,6 +5,8 @@ drop trigger if exists add_interim_mod;
 drop trigger if exists update_interim_mod;
 drop trigger if exists add_online_mod;
 drop trigger if exists update_online_mod;
+drop trigger if exists add_NIL_null_check;
+drop trigger if exists update_NIL_null_check;
 
 drop table if exists teaches;
 drop table if exists course_offering;
@@ -141,6 +143,24 @@ for each row BEGIN
 	if (NEW.mod_name = 'OL' and NEW.course_type != 'Online')
 	then
 		signal sqlstate value '45000' set message_text = 'OL mod is only for Online type classes!';
+	end if;
+end ;
+
+
+create trigger add_NIL_null_check after insert on teaches
+for each row BEGIN
+	if (NEW.mod_name is not null and NEW.course_id = 'NIL000') /* Special mod for N.I.L.s */
+	then
+		signal sqlstate value '45000' set message_text = "Non-Instructional Loads can't have a mod!";
+	end if;
+end ;
+
+
+create trigger update_NIL_null_check after update on teaches
+for each row BEGIN
+	if (NEW.mod_name is not null and NEW.course_id = 'NIL000') /* Special mod for N.I.L.s */
+	then
+		signal sqlstate value '45000' set message_text = "Non-Instructional Loads can't have a mod!";
 	end if;
 end ;
 
