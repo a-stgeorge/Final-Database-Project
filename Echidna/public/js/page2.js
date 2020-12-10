@@ -193,7 +193,7 @@ function coursesOnChange() {
             course_id = '${selectedcourse.course_id}'
             and title = '${selectedcourse.title}'
             and dept_name is NULL
-            and num_credits is NULL`
+            and num_credits is '${selectedcourse.num_credits}'`
         }; 
     } else {
         data = {

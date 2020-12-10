@@ -16,7 +16,7 @@ function courseTypeOnChange() {
     if (courseType === '') {
         document.getElementById('course_id').value = 'NIL000';
         document.getElementById('course_id').readOnly = true;
-        document.getElementById('num_credits').value = '';
+        document.getElementById('num_credits').value = 0;
         document.getElementById('num_credits').readOnly = true;
         document.getElementById('nilDescriptionLabel').hidden = false;
         document.getElementById('nilDescription').hidden = false;
@@ -35,9 +35,7 @@ async function addCourseOffering() {
     let year = document.getElementById('year').value;
     let sectionNum = document.getElementById('section_num').value;
     let numCredits = document.getElementById('num_credits').value;
-    if (numCredits === '') {
-        numCredits = null;
-    }
+
     let teuValue = document.getElementById('teu').value;
     
     if (teuValue === '') {
@@ -58,29 +56,7 @@ async function addCourseOffering() {
             clearResultDiv();
         } else {
             let data;
-            if (numCredits === null && teuValue === null) {
-                data = {
-                    query: `insert into course_offering values (
-                    '${courseID}',
-                    '${courseType}',
-                    '${semester}', 
-                    ${year},
-                    ${sectionNum},
-                    NULL,
-                    NULL)`
-                };
-            } else if (numCredits === null) {
-                data = {
-                    query: `insert into course_offering values (
-                    '${courseID}',
-                    '${courseType}',
-                    '${semester}', 
-                    ${year},
-                    ${sectionNum},
-                    NULL,
-                    ${teuValue})`
-                };
-            } else if (teuValue === null) {
+            if (teuValue === null) {
                 data = {
                     query: `insert into course_offering values (
                     '${courseID}',
@@ -242,10 +218,8 @@ async function deleteCourseOffering() {
     let year = document.getElementById('year').value;
     let sectionNum = document.getElementById('section_num').value;
     let numCredits = document.getElementById('num_credits').value;
-    if (numCredits === '') {
-        numCredits = null;
-    }
     let teuValue = document.getElementById('teu').value;
+
     if (teuValue === '') {
         teuValue = null;
     }
