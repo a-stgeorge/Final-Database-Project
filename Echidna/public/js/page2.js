@@ -21,8 +21,6 @@ function isValidCourseId(str) {
         && isInt(str.charAt(4)) && isInt(str.charAt(5));
 }
 
-//TODO numCredits cannot be null anymore, need to update all corresponding checks
-
 async function addCourse() {
     let courseId = document.getElementById('course_id').value.toUpperCase();
     let courseTitle = document.getElementById('title').value;
@@ -31,9 +29,6 @@ async function addCourse() {
         department = null;
     }
     let numCredits = document.getElementById('num_credits').value;
-    if (numCredits === '') {
-        numCredits = null;
-    }
 
     if (!document.getElementById('form').checkValidity()) {
         document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) is bordered red.';
@@ -193,7 +188,7 @@ function coursesOnChange() {
             course_id = '${selectedcourse.course_id}'
             and title = '${selectedcourse.title}'
             and dept_name is NULL
-            and num_credits is '${selectedcourse.num_credits}'`
+            and num_credits = '${selectedcourse.num_credits}'`
         }; 
     } else {
         data = {
@@ -230,7 +225,7 @@ function clearInputs() {
     document.getElementById('course_id').value = '';
     document.getElementById('title').value = '';
     document.getElementById('department').value = '';
-    document.getElementById('num_credits').value = '';
+    document.getElementById('num_credits').value = 0;
 }
 
 function clearResultDiv() {
