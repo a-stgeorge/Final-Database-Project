@@ -1,5 +1,4 @@
 window.onload = () => {
-    console.log('Page 3 boi');
     document.getElementById('submit').onclick = addCourseOffering;
     document.getElementById('delete').onclick = deleteCourseOffering;
     document.getElementById('form').onsubmit = (e) => {

@@ -1,5 +1,4 @@
 window.onload = () => {
-    console.log('Main page boi');
     document.getElementById('timeWarp1').onclick = timeWarp1;
     document.getElementById('timeWarp2').onclick = timeWarp2;
     document.getElementById('timeWarp3').onclick = timeWarp3;

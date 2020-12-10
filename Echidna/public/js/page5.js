@@ -1,5 +1,4 @@
 window.onload = () => {
-    console.log('Page 5 boi');
     document.getElementById('assign').onclick = assign;
     document.getElementById('unassign').onclick = unassign;
     document.getElementById('clearReport').onclick = clearReport;

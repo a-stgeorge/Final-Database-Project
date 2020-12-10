@@ -1,5 +1,4 @@
 window.onload = () => {
-    console.log('Page 2 boi');
     document.getElementById('form').onsubmit = (e) => {
         e.preventDefault();
     };
