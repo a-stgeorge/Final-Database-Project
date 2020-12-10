@@ -12,10 +12,10 @@ window.onload = async () => {
 
 function setMaxClusterID(){
     let data = {
-        query: 'select max(cluster_id) as max_cluster_num from course'
+        query: 'select max(cluster_id) as max_cluster_num from cluster'
     };
     return fetch('/action/page6', 
-    { 
+    {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ function setMaxClusterID(){
             localStorage['current_cluster_id'] = 0;
         }
         else{
-            localStorage['current_cluster_id'] = responseJson[0].max_cluster_num;
+            localStorage['current_cluster_id'] = responseJson[0].max_cluster_num + 1;
         }
     });
 }
@@ -50,7 +50,7 @@ async function createCluster(){
     selectedBoxes.forEach((box, i) => {
         if(box.checked === true){
             let data = {
-                query: `update course set cluster_id = ${localStorage['current_cluster_id']} where course_id = '${box.value}'`
+                query: `insert into cluster values(${localStorage['current_cluster_id']}, '${box.value}')`
             };
             fetch('/action/page6', 
             { 
@@ -81,7 +81,7 @@ async function createCluster(){
 async function getCourses() {
     
     let data = {
-        query: 'select course_id, title, dept_name, num_credits from course where cluster_id is NULL'
+        query: 'select course_id, title, dept_name, num_credits from course'
     };
     return fetch('/action/page6', 
     { 
@@ -106,7 +106,7 @@ async function getCourses() {
 async function getCourseClusters(){
 
     let data = {
-        query: 'select * from course where cluster_id is not NULL order by cluster_id'
+        query: 'select * from cluster'
     };
     return fetch('/action/page6', 
     { 
@@ -156,7 +156,7 @@ function createCheckboxes(){
 
 async function deleteClusters() {
     let data = {
-        query: 'update course set cluster_id = Null'
+        query: 'delete from cluster'
     };
     fetch('/action/page6', 
     { 

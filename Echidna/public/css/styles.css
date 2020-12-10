@@ -20,3 +20,8 @@ table, td, th {
 td {
     text-align: left;
 }
+
+.clusterTables{
+    float: left;
+    padding-left: 5em;
+}
