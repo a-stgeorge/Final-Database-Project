@@ -167,17 +167,21 @@ end ;
 
 create trigger add_instructor_schedule before insert on teaches
 for each row BEGIN
+	declare msg varchar(128);
 	if ( (NEW.instructor_id, NEW.course_type, NEW.semester, NEW.year, NEW.mod_name) in (select instructor_id, course_type, semester, year, mod_name from teaches where mod_name != 'OL') )
 	then 
-		signal sqlstate value '45000' set message_text =  'Instructor has been double scheduled!';
+		set msg = concat('Instructor has been double Scheduled! Instructor ID: ', cast(new.instructor_id as char));
+        	signal sqlstate '45000' set message_text = msg;
 	end if;
 end ;
 
 
 create trigger update_instructor_schedule before update on teaches
 for each row BEGIN
+	declare msg varchar(128);
 	if ( (NEW.instructor_id, NEW.course_type, NEW.semester, NEW.year, NEW.mod_name) in (select instructor_id, course_type, semester, year, mod_name from teaches where mod_name != 'OL') )
 	then 
-		signal sqlstate value '45000' set message_text =  'Instructor has been double scheduled!';
+		set msg = concat('Instructor has been double Scheduled! Instructor ID: ', cast(new.instructor_id as char));
+        	signal sqlstate '45000' set message_text = msg;
 	end if;
 end ;
