@@ -1,37 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Designate course clusters</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <link rel="icon" type="image/jpg" href="../echidna.jpg"/>
-        <script src="../js/table.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
-        <script src="../js/page6.js"></script>
-    </head>
-    <body>
-        <button onclick="window.location.href='/'">
-            Home
-        </button>
-        <br/>
-        <p>Select courses to create a cluster:</p>
-        <!-- TODO add checkbox for each course to designate cluster -->
 
-        <button type="button" id='create_cluster'>Create cluster</button><br/><br/>
-        <button type="button" id='delete_clusters'>Delete all clusters</button><br/><br/>
+<head>
+    <title>Designate course clusters</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="icon" type="image/jpg" href="../echidna.jpg" />
+    <script src="../js/table.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <div id="result"></div>
+    <script src="../js/page6.js"></script>
+</head>
 
-        <div id="courseDiv" class="clusterTables">
-            <p style="text-align: center;">Courses</p>
-            <table id="courses"></table>
-        </div>
+<body>
+    <button onclick="window.location.href='/'">
+        Home
+    </button>
+    <br />
+    <p>Select courses to create a cluster:</p>
 
-        <div id="courseClustersDiv" class="clusterTables">
-            <p style="text-align: center;">Current clusters</p>
-            <table id="courseClusters"></table>
-        </div>
-        
-    </body>
+    <button type="button" id='create_cluster'>Create cluster</button><br /><br />
+    <button type="button" id='delete_clusters'>Delete all clusters</button><br /><br />
+
+    <div id="result"></div>
+
+    <div id="courseDiv" class="clusterTables">
+        <p style="text-align: center;">Courses</p>
+        <table id="courses"></table>
+    </div>
+
+    <div id="courseClustersDiv" class="clusterTables">
+        <p style="text-align: center;">Current clusters</p>
+        <table id="courseClusters"></table>
+    </div>
+
+</body>
+
 </html>

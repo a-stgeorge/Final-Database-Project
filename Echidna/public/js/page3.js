@@ -484,7 +484,7 @@ function courseOfferingsOnChange() {
 
     document.getElementById('course_id').value = selectedCourseOffering.course_id;
     courseIdOnChange();
-    
+
     switch (selectedCourseOffering.course_type) {
         case 'InPerson':
             document.getElementById('course_type').selectedIndex = 0;

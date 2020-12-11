@@ -1,42 +1,45 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Add courses</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <link rel="icon" type="image/jpg" href="../echidna.jpg"/>
-        <script src="../js/table.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
-        <script src="../js/page2.js"></script>
-    </head>
-    <body>
-        <button onclick="window.location.href='/'">Home</button>
-        <br/>
-        <p>Values left blank will be considered NULL</p>
-        <form id="form">
-            <label for="course_id">Course ID:</label>
-            <input type="text" id="course_id" required><br/>
-            
-            <label for="title">Course Title:</label>
-            <input type="text" id="title" required><br/>
-            
-            <label for="department">Department:</label>
-            <input type="text" id="department"><br/>
-            
-            <label for="num_credits">Number credits:</label>
-            <input type="number" id="num_credits" step="0.5" min="0" max="9.5" style="width: 100px;" required><br/>
-            
-            <button type="submit" id="submit" style="margin-top: 10px;">Submit Course Addition/Change</button>
-        </form>
 
-        <button type="button" id="clearInput" style="margin-top: 10px;">Default Inputs (Clear)</button>
+<head>
+    <title>Add courses</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="icon" type="image/jpg" href="../echidna.jpg" />
+    <script src="../js/table.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <div id="result"></div>
+    <script src="../js/page2.js"></script>
+</head>
 
-        <div>
-            <label for="courses">Courses:</label>
-            <span id="courses"></span>
-        </div>
-    </body>
+<body>
+    <button onclick="window.location.href='/'">Home</button>
+    <br />
+    <p>Values left blank will be considered NULL</p>
+    <form id="form">
+        <label for="course_id">Course ID:</label>
+        <input type="text" id="course_id" required><br />
+
+        <label for="title">Course Title:</label>
+        <input type="text" id="title" required><br />
+
+        <label for="department">Department:</label>
+        <input type="text" id="department"><br />
+
+        <label for="num_credits">Number credits:</label>
+        <input type="number" id="num_credits" step="0.5" min="0" max="9.5" style="width: 100px;" required><br />
+
+        <button type="submit" id="submit" style="margin-top: 10px;">Submit Course Addition/Change</button>
+    </form>
+
+    <button type="button" id="clearInput" style="margin-top: 10px;">Default Inputs (Clear)</button>
+
+    <div id="result"></div>
+
+    <div>
+        <label for="courses">Courses:</label>
+        <span id="courses"></span>
+    </div>
+</body>
+
 </html>

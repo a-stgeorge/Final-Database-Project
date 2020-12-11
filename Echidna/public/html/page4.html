@@ -1,50 +1,52 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Assign course offerings to inctructors</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <link rel="icon" type="image/jpg" href="../echidna.jpg"/>
-        <script src="../js/table.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
-        <script src="../js/page4.js"></script>
-    </head>
-    <body>
-        <button onclick="window.location.href='/'">
-            Home
-        </button>
-        <br/>
-        <button type="button" id='refreshDropdowns'>Refresh dropdowns</button>
-        
-        <button type="button" id='assign'>Assign selected offering to selected instructor</button>
-        <button type="button" id='unassign'>Un-assign selected offering from selected instructor</button>
-        
-        <div id="result"></div>
 
-        <div style='margin-top: 5%'>
-            <label for="offerings">Course Offerings:</label>
-            <span id="offerings"></span>
-            <br/>
-            <label for="assignedInstructor">ID(s) of instructor(s) assigned to this course:</label>
-            <span id="assignedInstructor"></span>
-        </div>
+<head>
+    <title>Assign course offerings to inctructors</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="icon" type="image/jpg" href="../echidna.jpg" />
+    <script src="../js/table.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-        <div style='margin-top: 2%'>
-            <label for="instructors">Instructors:</label>
-            <span id="instructors"></span>
-            <br/>
-            <label for="assignedCourses">Courses assigned to this instructor:</label>
-            <div id="assignedCourses"></div>
-        </div>
+    <script src="../js/page4.js"></script>
+</head>
 
-        <button type="button" id="offeringsPerInstructor">Show course offerings assigned to each instructor</button>
-        <button type="button" id="instructorsPerOfferings">Show instructors assigned to each course offering</button>
-        <button type="button" id="unassignedCourseOfferings">Show course offerings not assigned to an instructor</button>
-        <button type="button" id="targetLoads">Show instructors not at their target loads</button>
-        <button type="button" id="clearReport">Clear report</button>
+<body>
+    <button onclick="window.location.href='/'">
+        Home
+    </button>
+    <br />
 
-        <div id="report"></div>
+    <button type="button" id='assign'>Assign selected offering to selected instructor</button>
+    <button type="button" id='unassign'>Un-assign selected offering from selected instructor</button>
 
-    </body>
+    <div id="result"></div>
+
+    <div style='margin-top: 5%'>
+        <label for="offerings">Course Offerings:</label>
+        <span id="offerings"></span>
+        <br />
+        <label for="assignedInstructor">ID(s) of instructor(s) assigned to this course:</label>
+        <span id="assignedInstructor"></span>
+    </div>
+
+    <div style='margin-top: 2%'>
+        <label for="instructors">Instructors:</label>
+        <span id="instructors"></span>
+        <br />
+        <label for="assignedCourses">Courses assigned to this instructor:</label>
+        <div id="assignedCourses"></div>
+    </div>
+
+    <button type="button" id="offeringsPerInstructor">Show course offerings assigned to each instructor</button>
+    <button type="button" id="instructorsPerOfferings">Show instructors assigned to each course offering</button>
+    <button type="button" id="unassignedCourseOfferings">Show course offerings not assigned to an instructor</button>
+    <button type="button" id="targetLoads">Show instructors not at their target loads</button>
+    <button type="button" id="clearReport">Clear report</button>
+
+    <div id="report"></div>
+
+</body>
+
 </html>

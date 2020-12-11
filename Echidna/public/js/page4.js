@@ -1,5 +1,4 @@
 window.onload = () => {
-    document.getElementById('refreshDropdowns').onclick = refreshDropdowns;
     document.getElementById('assign').onclick = assign;
     document.getElementById('unassign').onclick = unassign;
 
@@ -196,10 +195,6 @@ function addToLoadTable(instructorID, firstName, lastName, loadSum, issue) {
     newCell4.innerHTML = issue;
 }
 
-function refreshDropdowns() {
-    courseOfferingsDropDown();
-    instructorDropdown();
-}
 
 function assign() {
     clearReport();

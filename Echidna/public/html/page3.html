@@ -1,75 +1,79 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Add course sections</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <link rel="icon" type="image/jpg" href="../echidna.jpg"/>
-        <script src="../js/table.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
-        <script src="../js/page3.js"></script>
-    </head>
-    <body>
-        <button onclick="window.location.href='/'">
-            Home
-        </button>
-        <br/>
-        <p>Values left blank will be considered NULL</p>
-        <p style="margin-bottom: 0;">To insert a new Non-Instructional Load select Non-instructional Load from Course Type dropdown</p>
 
-        <form id="form">
-            <label for="course_id">Course ID:</label>
-            <input type="text" id="course_id" required>
-            <label for="course_id" id="num_credits">Credits:</label><br/>
+<head>
+    <title>Add course sections</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="icon" type="image/jpg" href="../echidna.jpg" />
+    <script src="../js/table.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-            <label for="course_type">Course type:</label>
-            <select id="course_type" required>
-                <option value="InPerson">In person</option>
-                <option value="Online">Online</option>
-                <option value="">Non-instructional Load</option>
-            </select><br/>
+    <script src="../js/page3.js"></script>
+</head>
 
-            <label for="nilDescription" hidden id=nilDescriptionLabel>Non-Instructional Load Description:</label>
-            <input id=nilDescription type="text" hidden required >
-            <br/>
+<body>
+    <button onclick="window.location.href='/'">
+        Home
+    </button>
+    <br />
+    <p>Values left blank will be considered NULL</p>
+    <p style="margin-bottom: 0;">To insert a new Non-Instructional Load select Non-instructional Load from Course Type
+        dropdown</p>
 
-            <label for="semester">Semester:</label>
-            <select id="semester" required>
-                <option value="Fall">Fall</option>
-                <option value="Interim">Interim</option>
-                <option value="Spring">Spring</option>
-                <option value="Summer">Summer</option>
-            </select><br/>
+    <form id="form">
+        <label for="course_id">Course ID:</label>
+        <input type="text" id="course_id" required>
+        <label for="course_id" id="num_credits">Credits:</label><br />
 
-            <label for="year">Year:</label>
-            <input type="number" id="year" min="0" max="2500" step="1" value="2020" style="width: 100px;" required>
-            <br/>
-            
-            <label for="section_num">Section number:</label>
-            <input type="number" id="section_num" min="1" step="1" style="width: 100px;" value="1" required>
-            <br/>
+        <label for="course_type">Course type:</label>
+        <select id="course_type" required>
+            <option value="InPerson">In person</option>
+            <option value="Online">Online</option>
+            <option value="">Non-instructional Load</option>
+        </select><br />
 
-            <label for="teu">TEU value:</label>
-            <input type="number" id="teu" min="0" step="0.1" max="99.5" style="width: 100px;" value="3.4">
-            <br/>
+        <label for="nilDescription" hidden id=nilDescriptionLabel>Non-Instructional Load Description:</label>
+        <input id=nilDescription type="text" hidden required>
+        <br />
 
-            <button type="submit" id="submit" style="margin-top: 10px;">Add Course Offering</button>
-            <button type="submit" id="delete" style="margin-top: 10px;">Delete Course Offering</button>
-        </form>
+        <label for="semester">Semester:</label>
+        <select id="semester" required>
+            <option value="Fall">Fall</option>
+            <option value="Interim">Interim</option>
+            <option value="Spring">Spring</option>
+            <option value="Summer">Summer</option>
+        </select><br />
 
-        <button id="clearInput" type="button" style="margin-top: 10px;">Clear Inputs</button>
+        <label for="year">Year:</label>
+        <input type="number" id="year" min="0" max="2500" step="1" value="2020" style="width: 100px;" required>
+        <br />
 
-        <div id="result"></div>
+        <label for="section_num">Section number:</label>
+        <input type="number" id="section_num" min="1" step="1" style="width: 100px;" value="1" required>
+        <br />
 
-        <div style="margin-top: 10px;">
-            <label for="courses">Courses:</label>
-            <span id="courses"></span>
-        </div>
+        <label for="teu">TEU value:</label>
+        <input type="number" id="teu" min="0" step="0.1" max="99.5" style="width: 100px;" value="3.4">
+        <br />
 
-        <div style="margin-top: 20px;">
-            <label for="courseOfferings">Course Offerings:</label>
-            <span id="courseOfferings"></span>
-        </div>
-    </body>
+        <button type="submit" id="submit" style="margin-top: 10px;">Add Course Offering</button>
+        <button type="submit" id="delete" style="margin-top: 10px;">Delete Course Offering</button>
+    </form>
+
+    <button id="clearInput" type="button" style="margin-top: 10px;">Clear Inputs</button>
+
+    <div id="result"></div>
+
+    <div style="margin-top: 10px;">
+        <label for="courses">Courses:</label>
+        <span id="courses"></span>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <label for="courseOfferings">Course Offerings:</label>
+        <span id="courseOfferings"></span>
+    </div>
+</body>
+
 </html>

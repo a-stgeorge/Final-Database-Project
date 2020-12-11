@@ -1,56 +1,59 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Add instructors</title>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" type="text/css" href="../css/styles.css">
-        <link rel="icon" type="image/jpg" href="../echidna.jpg"/>
-        <script src="../js/table.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        
-        <script src="../js/page1.js"></script>
-    </head>
-    <body>
-        <button onclick="window.location.href='/'">Home</button>
-        <br/>
 
-        <form id="form">
-            <label for="instructor_id">Instructor ID:</label>
-            <input type="number" id="instructor_id" required min="0" max="99999999" step="1" value="0"><br/>
+<head>
+    <title>Add instructors</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="icon" type="image/jpg" href="../echidna.jpg" />
+    <script src="../js/table.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-            <label for="firstname">First name:</label>
-            <input type="text" id="firstname" required><br/>
-            
-            <label for="lastname">Last name:</label>
-            <input type="text" id="lastname" required><br/>
-            
-            <label for="email">Email:</label>
-            <input type="email" id="email" required><br/>
+    <script src="../js/page1.js"></script>
+</head>
 
-            <label for="dept">Department:</label>
-            <input type="text" id="dept" required value="MathCs" style="width: 100px"><br/>
+<body>
+    <button onclick="window.location.href='/'">Home</button>
+    <br />
 
-            <label for="load_min">Desired load min:</label>
-            <input type="text" id="load_min" value="23.5" required style="width: 60px">
-            <button id="minMinus" type="button">-</button>
-            <button id="minPlus" type="button">+</button>
-            <br/>
-            
-            <label for="load_max">Desired load max:</label>
-            <input type="text" id="load_max" value="23.8" required style="width: 60px">
-            <button id="maxMinus" type="button">-</button>
-            <button id="maxPlus" type="button">+</button>
-            <br/>
+    <form id="form">
+        <label for="instructor_id">Instructor ID:</label>
+        <input type="number" id="instructor_id" required min="0" max="99999999" step="1" value="0"><br />
 
-            <button type="submit" id="submit" style="margin-top: 10px;">Submit Instructor Addition/Change</button>
-        </form>
-        <button type="button" id="clearInputs" style="margin-top: 10px;">Default Inputs (Clear)</button>
+        <label for="firstname">First name:</label>
+        <input type="text" id="firstname" required><br />
 
-        <div id="result"></div>
+        <label for="lastname">Last name:</label>
+        <input type="text" id="lastname" required><br />
 
-        <div>
-            <label for="instructors">Instructors:</label>
-            <span id="instructors"></span>
-        </div>
-    </body>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br />
+
+        <label for="dept">Department:</label>
+        <input type="text" id="dept" required value="MathCs" style="width: 100px"><br />
+
+        <label for="load_min">Desired load min:</label>
+        <input type="text" id="load_min" value="23.5" required style="width: 60px">
+        <button id="minMinus" type="button">-</button>
+        <button id="minPlus" type="button">+</button>
+        <br />
+
+        <label for="load_max">Desired load max:</label>
+        <input type="text" id="load_max" value="23.8" required style="width: 60px">
+        <button id="maxMinus" type="button">-</button>
+        <button id="maxPlus" type="button">+</button>
+        <br />
+
+        <button type="submit" id="submit" style="margin-top: 10px;">Submit Instructor Addition/Change</button>
+    </form>
+    <button type="button" id="clearInputs" style="margin-top: 10px;">Default Inputs (Clear)</button>
+
+    <div id="result"></div>
+
+    <div>
+        <label for="instructors">Instructors:</label>
+        <span id="instructors"></span>
+    </div>
+</body>
+
 </html>
