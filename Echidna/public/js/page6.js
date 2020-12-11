@@ -66,7 +66,7 @@ async function createCluster() {
                 document.getElementById('result').innerHTML = 'Success!';
                 clearResultDiv();
             });
-            selectedBoxes[i].checked = false;
+        selectedBoxes[i].checked = false;
     }
     localStorage['current_cluster_id'] = parseInt(localStorage['current_cluster_id']) + 1;
     await getCourseClusters();
@@ -126,7 +126,7 @@ function createCheckboxes() {
     var table = document.getElementById('courses');
     var rows = document.querySelectorAll('#courses tr');
 
-    if (rows.length === 0){
+    if (rows.length === 0) {
         document.getElementById('result').innerHTML = "The courses table is empty";
         document.getElementById('courseDiv').style.display = "none";
         document.getElementById('courseClustersDiv').style.display = "none";
