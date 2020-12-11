@@ -129,6 +129,10 @@ function createCheckboxes() {
     var table = document.getElementById('courses');
     var rows = document.querySelectorAll('#courses tr');
 
+    if (rows.length === 0){
+        document.getElementById('result').innerHTML = "The courses table is emtpy";
+        return;
+    }
     rows.forEach((row, i) => {
         if (i === 0) {
             var head = document.createElement('th');

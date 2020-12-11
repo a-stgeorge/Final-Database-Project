@@ -25,20 +25,23 @@ function Headers(list, selector) {
     var columns = []; 
     var header = $('<tr/>'); 
       
-    for (var i = 0; i < list.length; i++) { 
-        var row = list[i]; 
-          
-        for (var k in row) { 
-            if ($.inArray(k, columns) == -1) { 
-                columns.push(k); 
-                  
-                // Creating the header 
-                header.append($('<th/>').html(k)); 
+    if (list.length > 0){
+        for (var i = 0; i < list.length; i++) { 
+            var row = list[i]; 
+            
+            for (var k in row) { 
+                if ($.inArray(k, columns) == -1) { 
+                    columns.push(k); 
+                    
+                    // Creating the header 
+                    header.append($('<th/>').html(k)); 
+                } 
             } 
         } 
-    } 
-      
-    // Appending the header to the table 
-    $(selector).append(header); 
-        return columns; 
+        
+        // Appending the header to the table 
+        $(selector).append(header); 
+            return columns; 
+    }
+    return;
 }
