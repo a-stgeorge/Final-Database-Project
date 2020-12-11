@@ -363,11 +363,13 @@ function coursesOnChange() {
         document.getElementById('nilDescriptionLabel').hidden = false;
         document.getElementById('nilDescription').hidden = false;
         document.getElementById('nilDescription').value = '';
+        document.getElementById('num_credits').readOnly = true;
     } else {
         document.getElementById('nilDescriptionLabel').hidden = true;
         document.getElementById('nilDescription').hidden = true;
         document.getElementById('nilDescription').value = '';
         document.getElementById('course_type').selectedIndex = 0;
+        document.getElementById('num_credits').readOnly = false;
     }
 
     let data;
@@ -464,10 +466,12 @@ function courseOfferingsOnChange() {
         document.getElementById('nilDescriptionLabel').hidden = false;
         document.getElementById('nilDescription').hidden = false;
         document.getElementById('nilDescription').value = selectedCourseOffering.course_type;
+        document.getElementById('num_credits').readOnly = true;
     } else {
         document.getElementById('nilDescriptionLabel').hidden = true;
         document.getElementById('nilDescription').hidden = true;
         document.getElementById('nilDescription').value = '';
+        document.getElementById('num_credits').readOnly = false;
     }
 
     document.getElementById('course_id').value = selectedCourseOffering.course_id;
@@ -518,6 +522,7 @@ function clearInputs() {
     document.getElementById('year').value = 2020;
     document.getElementById('section_num').value = 1;
     document.getElementById('num_credits').value = 0;
+    document.getElementById('num_credits').readOnly = false;
     document.getElementById('teu').value = 3.4;
     document.getElementById('nilDescriptionLabel').hidden = true;
     document.getElementById('nilDescription').hidden = true;
