@@ -47,6 +47,7 @@ async function addCourseOffering() {
             clearResultDiv();
             return;
         }
+        courseType = document.getElementById("nilDescription").value;
     }
 
     if (await courseExists(courseID)) {
