@@ -45,12 +45,12 @@ async function createCluster() {
         clearResultDiv();
         return;
     }
-    selectedBoxes.forEach((box, i) => {
+    selectedBoxes.forEach(async (box) => {
         if (box.checked === true) {
             let data = {
                 query: `insert into cluster values(${localStorage['current_cluster_id']}, '${box.value}')`
             };
-            fetch('/action/page6',
+            await fetch('/action/page6',
                 {
                     method: 'POST',
                     headers: {
@@ -64,7 +64,6 @@ async function createCluster() {
                         clearResultDiv();
                         return;
                     }
-                    let responseJson = await response.json();
                     document.getElementById('result').innerHTML = 'Success!';
                     clearResultDiv();
                 });
@@ -175,7 +174,6 @@ async function deleteClusters() {
                 clearResultDiv();
                 return;
             }
-            let responseJson = await response.json();
             document.getElementById('result').innerHTML = 'Success!';
             clearResultDiv();
         });
