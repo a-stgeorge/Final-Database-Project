@@ -5,8 +5,8 @@ window.onload = () => {
     document.getElementById('unassignedCourses').onclick = unassignedCourses;
     document.getElementById('assignedTimes').onclick = assignedTimes;
     document.getElementById('instructorTimes').onclick = instructorTimes;
-    courseOfferingsDropDown();
-    timeslotDropDown();
+    courseOfferingsDropDown().then(() => courseOfferingOnChange());
+    timeslotDropDown().then(() => timeslotOnChange());
 }
 
 function assign() {
@@ -150,6 +150,10 @@ function populateOfferingDropdown(data) {
 
 function courseOfferingOnChange() {
     clearReport();
+    if (document.getElementById('offeringsSelect').length === 0
+        || document.getElementById('timeslotsSelect')?.length === 0) {
+        return;
+    }
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let data = {
         query: `select * from teaches where 
@@ -261,9 +265,13 @@ function populateTimeslotDropdown(data) {
 
 function timeslotOnChange() {
     clearReport();
+    if (document.getElementById('timeslotsSelect').length === 0
+        || document.getElementById('offeringsSelect').length === 0) {
+        return;
+    }
     let selectedTimeSlot = JSON.parse(document.getElementById('timeslotsSelect').value);
     let data = {
-        query: `select course_id, course_type, semester, year, section_num from teaches where 
+        query: `select course_id, course_type, semester, year, section_num from teaches where
         mod_name = '${selectedTimeSlot.mod_name}' 
         and mod_credits = ${selectedTimeSlot.mod_credits}`
     };

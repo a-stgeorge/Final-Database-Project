@@ -9,8 +9,8 @@ window.onload = () => {
     document.getElementById('targetLoads').onclick = targetLoads;
     document.getElementById('clearReport').onclick = clearReport;
 
-    courseOfferingsDropDown();
-    instructorDropdown();
+    courseOfferingsDropDown().then(() => courseOfferingOnChange());
+    instructorDropdown().then(() => instructorOnChange());
 }
 
 function offeringsPerInstructor() {
@@ -378,6 +378,10 @@ function populateInstructorDropdown(data) {
 
 function courseOfferingOnChange() {
     clearReport();
+    if (document.getElementById('offeringsSelect').length === 0
+        || document.getElementById('instructorsSelect')?.length === 0) {
+        return;
+    }
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let data = {
         query: `select instructor_id from teaches where 
@@ -426,6 +430,10 @@ function courseOfferingOnChange() {
 
 function instructorOnChange() {
     clearReport();
+    if (document.getElementById('offeringsSelect').length === 0
+        || document.getElementById('instructorsSelect').length === 0) {
+        return;
+    }
     let selectedInstructor = JSON.parse(document.getElementById('instructorsSelect').value);
     let data = {
         query: `select course_id, course_type, semester, year, section_num from teaches where 
