@@ -45,31 +45,29 @@ async function createCluster() {
         clearResultDiv();
         return;
     }
-    selectedBoxes.forEach(async (box) => {
-        if (box.checked === true) {
-            let data = {
-                query: `insert into cluster values(${localStorage['current_cluster_id']}, '${box.value}')`
-            };
-            await fetch('/action/page6',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                }).then(async response => {
-                    if (!response.ok) {
-                        let responseMessage = await response.text();
-                        document.getElementById('result').innerHTML = responseMessage;
-                        clearResultDiv();
-                        return;
-                    }
-                    document.getElementById('result').innerHTML = 'Success!';
+    for (let i = 0; i < selectedBoxes.length; i++) {
+        let data = {
+            query: `insert into cluster values(${localStorage['current_cluster_id']}, '${selectedBoxes[i].value}')`
+        };
+        fetch('/action/page6',
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            }).then(async response => {
+                if (!response.ok) {
+                    let responseMessage = await response.text();
+                    document.getElementById('result').innerHTML = responseMessage;
                     clearResultDiv();
-                });
-            box.checked = false;
-        }
-    });
+                    return;
+                }
+                document.getElementById('result').innerHTML = 'Success!';
+                clearResultDiv();
+            });
+            selectedBoxes[i].checked = false;
+    }
     localStorage['current_cluster_id'] = parseInt(localStorage['current_cluster_id']) + 1;
     await getCourseClusters();
 }
@@ -104,7 +102,7 @@ async function getCourseClusters() {
     let data = {
         query: 'select * from cluster'
     };
-    return fetch('/action/page6',
+    await fetch('/action/page6',
         {
             method: 'POST',
             headers: {
