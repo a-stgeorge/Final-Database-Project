@@ -185,3 +185,43 @@ for each row BEGIN
         	signal sqlstate '45000' set message_text = msg;
 	end if;
 end ;
+
+
+/* MOD INSERTS */
+
+insert into mod_table values('A', '8:00:00', '8:50:00', 3 , 'MWF');
+insert into mod_table values('A', '7:40:00', '8:50:00', 4 , 'MWF');
+insert into mod_table values('B', '9:00:00', '9:50:00', 3 , 'MWF');
+insert into mod_table values('B', '9:00:00', '10:10:00', 4 , 'MWF');
+insert into mod_table values('C', '11:10:00', '12:00:00', 3 , 'MWF');
+insert into mod_table values('C', '11:10:00', '12:20:00', 4 , 'MWF');
+insert into mod_table values('D', '12:30:00', '13:20:00', 3 , 'MWF');
+insert into mod_table values('D', '12:30:00', '13:40:00', 4 , 'MWF');
+insert into mod_table values('E', '13:50:00', '14:40:00', 3 , 'MWF');
+insert into mod_table values('F', '14:50:00', '15:40:00', 3 , 'MWF');
+insert into mod_table values('F', '14:50:00', '16:00:00', 4 , 'MWF');
+insert into mod_table values('K', '16:10:00', '17:25:00', 3 , 'MW');
+insert into mod_table values('K', '16:10:00', '17:50:00', 4 , 'MW');
+insert into mod_table values('M', '18:00:00', '21:00:00', 3 , 'M');
+insert into mod_table values('M', '18:00:00', '22:00:00', 4 , 'M');
+insert into mod_table values('G', '8:00:00', '9:15:00', 3 , 'TR');
+insert into mod_table values('H', '9:25:00', '10:40:00', 3 , 'TR');
+insert into mod_table values('H', '9:25:00', '11:05:00', 4 , 'TR');
+insert into mod_table values('I', '12:15:00', '13:30:00', 3 , 'TR');
+insert into mod_table values('I', '12:15:00', '13:55:00', 4 , 'TR');
+insert into mod_table values('J', '14:05:00', '15:20:00', 3 , 'TR');
+insert into mod_table values('J', '14:05:00', '15:45:00', 4 , 'TR');
+insert into mod_table values('T', '18:00:00', '21:00:00', 3 , 'T');
+insert into mod_table values('T', '18:00:00', '22:00:00', 4 , 'T');
+insert into mod_table values('W', '18:00:00', '21:00:00', 3 , 'W');
+insert into mod_table values('W', '18:00:00', '22:00:00', 4 , 'W');
+insert into mod_table values('R', '18:00:00', '21:00:00', 3 , 'R');
+insert into mod_table values('R', '18:00:00', '22:00:00', 4 , 'R');
+insert into mod_table values('AA', '8:00:00', '10:45:00', 3, 'MTWRF');
+insert into mod_table values('BB', '13:00:00', '15:45:00', 3, 'MTWRF');
+insert into mod_table values ('OL', null, null, 3, null);
+insert into mod_table values ('OL', null, null, 4, null);
+
+/* SPECIAL ROWS */
+
+insert into course values('NIL000', 'Non-Instructional Load', 'General', 0); 

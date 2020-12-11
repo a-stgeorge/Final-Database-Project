@@ -45,4 +45,3 @@ insert into course values('MAT330', 'Probability and Statistics', 'MathCs', 3);
 insert into course values('MAT376', 'Operations Research', 'MathCs', 3);
 insert into course values('MAT422', 'Real Analysis', 'MathCs', 4);
 insert into course values('MAT499', 'Foundations of Mathematics', 'MathCs', 3);
-insert into course values('NIL000', 'Non-Instructional Load', 'General', 0);  /* Non instructional loads now are 0 credits */

@@ -1,38 +1,3 @@
-/* MODS */
-
-insert into mod_table values('A', '8:00:00', '8:50:00', 3 , 'MWF');
-insert into mod_table values('A', '7:40:00', '8:50:00', 4 , 'MWF');
-insert into mod_table values('B', '9:00:00', '9:50:00', 3 , 'MWF');
-insert into mod_table values('B', '9:00:00', '10:10:00', 4 , 'MWF');
-insert into mod_table values('C', '11:10:00', '12:00:00', 3 , 'MWF');
-insert into mod_table values('C', '11:10:00', '12:20:00', 4 , 'MWF');
-insert into mod_table values('D', '12:30:00', '13:20:00', 3 , 'MWF');
-insert into mod_table values('D', '12:30:00', '13:40:00', 4 , 'MWF');
-insert into mod_table values('E', '13:50:00', '14:40:00', 3 , 'MWF');
-insert into mod_table values('F', '14:50:00', '15:40:00', 3 , 'MWF');
-insert into mod_table values('F', '14:50:00', '16:00:00', 4 , 'MWF');
-insert into mod_table values('K', '16:10:00', '17:25:00', 3 , 'MW');
-insert into mod_table values('K', '16:10:00', '17:50:00', 4 , 'MW');
-insert into mod_table values('M', '18:00:00', '21:00:00', 3 , 'M');
-insert into mod_table values('M', '18:00:00', '22:00:00', 4 , 'M');
-insert into mod_table values('G', '8:00:00', '9:15:00', 3 , 'TR');
-insert into mod_table values('H', '9:25:00', '10:40:00', 3 , 'TR');
-insert into mod_table values('H', '9:25:00', '11:05:00', 4 , 'TR');
-insert into mod_table values('I', '12:15:00', '13:30:00', 3 , 'TR');
-insert into mod_table values('I', '12:15:00', '13:55:00', 4 , 'TR');
-insert into mod_table values('J', '14:05:00', '15:20:00', 3 , 'TR');
-insert into mod_table values('J', '14:05:00', '15:45:00', 4 , 'TR');
-insert into mod_table values('T', '18:00:00', '21:00:00', 3 , 'T');
-insert into mod_table values('T', '18:00:00', '22:00:00', 4 , 'T');
-insert into mod_table values('W', '18:00:00', '21:00:00', 3 , 'W');
-insert into mod_table values('W', '18:00:00', '22:00:00', 4 , 'W');
-insert into mod_table values('R', '18:00:00', '21:00:00', 3 , 'R');
-insert into mod_table values('R', '18:00:00', '22:00:00', 4 , 'R');
-insert into mod_table values('AA', '8:00:00', '10:45:00', 3, 'MTWRF');
-insert into mod_table values('BB', '13:00:00', '15:45:00', 3, 'MTWRF');
-insert into mod_table values ('OL', null, null, 3, null);
-insert into mod_table values ('OL', null, null, 4, null);
-
 /* TEACHES INSERTS */
 
 insert into teaches values(10000001, 'COS100', 'InPerson', 'fall', 2020, 1, 'A', 3);
@@ -69,7 +34,7 @@ insert into teaches values(10000009, 'MAT124', 'InPerson', 'fall', 2020, 2, 'G',
 insert into teaches values(10000009, 'MAT223', 'InPerson', 'fall', 2020, 1, 'T', 3);
 insert into teaches values(10000009, 'MAT223', 'InPerson', 'fall', 2020, 2, 'R', 3);
 insert into teaches values(10000010, 'NIL000', 'Sabbatical', 'fall', 2020, 1, null, null);
-insert into teaches values(10000010, 'NIL000', 'Coaching', 'fall', 2020, 1, null, null);
+insert into teaches values(10000010, 'NIL000', 'Coaching', 'spring', 2021, 1, null, null);
 insert into teaches values(10000001, 'COS100', 'InPerson', 'interim', 2021, 1, 'AA', 3);
 insert into teaches values(10000002, 'COS320', 'Online', 'interim', 2021, 1, 'OL', 3);
 insert into teaches values(10000003, 'COS351', 'InPerson', 'interim', 2021, 1, 'BB', 3);
@@ -119,4 +84,3 @@ insert into teaches values(10000010, 'MAT209', 'InPerson', 'spring', 2021, 1, 'A
 insert into teaches values(10000010, 'MAT222', 'InPerson', 'spring', 2021, 2, 'C', 3);
 insert into teaches values(10000010, 'COS216', 'InPerson', 'spring', 2021, 2, 'G', 3);
 insert into teaches values(10000010, 'MAT125', 'InPerson', 'spring', 2021, 2, 'M', 3);
-insert into teaches values(10000010, 'COS301', 'InPerson', 'fall', 2020, 2, 'W', 4);

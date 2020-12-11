@@ -34,7 +34,7 @@ insert into teaches values(10000009, 'MAT124', 'InPerson', 'fall', 2020, 2, NULL
 insert into teaches values(10000009, 'MAT223', 'InPerson', 'fall', 2020, 1, NULL, NULL);
 insert into teaches values(10000009, 'MAT223', 'InPerson', 'fall', 2020, 2, NULL, NULL);
 insert into teaches values(10000010, 'NIL000', 'Sabbatical', 'fall', 2020, 1, null, null);
-insert into teaches values(10000010, 'NIL000', 'Coaching', 'fall', 2020, 1, null, null);
+insert into teaches values(10000010, 'NIL000', 'Coaching', 'spring', 2021, 1, null, null);
 insert into teaches values(10000001, 'COS100', 'InPerson', 'interim', 2021, 1, NULL, NULL);
 insert into teaches values(10000002, 'COS320', 'Online', 'interim', 2021, 1, NULL, NULL);
 insert into teaches values(10000003, 'COS351', 'InPerson', 'interim', 2021, 1, NULL, NULL);
@@ -84,4 +84,3 @@ insert into teaches values(10000010, 'MAT209', 'InPerson', 'spring', 2021, 1, NU
 insert into teaches values(10000010, 'MAT222', 'InPerson', 'spring', 2021, 2, NULL, NULL);
 insert into teaches values(10000010, 'COS216', 'InPerson', 'spring', 2021, 2, NULL, NULL);
 insert into teaches values(10000010, 'MAT125', 'InPerson', 'spring', 2021, 2, NULL, NULL);
-insert into teaches values(10000010, 'COS301', 'InPerson', 'fall', 2020, 2, NULL, NULL);
