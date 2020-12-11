@@ -130,7 +130,9 @@ function createCheckboxes() {
     var rows = document.querySelectorAll('#courses tr');
 
     if (rows.length === 0){
-        document.getElementById('result').innerHTML = "The courses table is emtpy";
+        document.getElementById('result').innerHTML = "The courses table is empty";
+        document.getElementById('courseDiv').style.display = "none";
+        document.getElementById('courseClustersDiv').style.display = "none";
         return;
     }
     rows.forEach((row, i) => {
