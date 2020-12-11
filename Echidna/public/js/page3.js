@@ -51,7 +51,7 @@ async function addCourseOffering() {
         teuValue = null;
     }
 
-    if (!document.getElementById('form').checkValidity()) {
+    if (courseID === '' || year === '' || sectionNum === '') {
         document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) bordered red.';
         clearResultDiv();
         return;
@@ -270,7 +270,7 @@ async function deleteCourseOffering() {
         teuValue = null;
     }
 
-    if (!document.getElementById('form').checkValidity()) {
+    if (courseID === '' || year === '' || sectionNum === '') {
         document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) bordered red.';
         clearResultDiv();
         return;
