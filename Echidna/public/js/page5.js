@@ -104,7 +104,7 @@ function unassign() {
 
 function courseOfferingsDropDown() {
     let data = {
-        query: 'select course_id, course_type, semester, year, section_num from course_offering'
+        query: 'select course_id, course_type, semester, year, section_num, num_credits from course_offering'
     };
     return fetch('/action/page5', {
         method: 'POST',
@@ -141,7 +141,7 @@ function populateOfferingDropdown(data) {
     let option;
     for (let i = 0; i < data.length; i++) {
         option = document.createElement('option');
-        option.text = `${data[i].course_id}, Section: ${data[i].section_num}, 
+        option.text = `${data[i].course_id}, Section: ${data[i].section_num}, Credits: ${data[i].num_credits},
       ${data[i].course_type}, ${data[i].semester}, ${data[i].year}`;
         option.value = JSON.stringify(data[i]);
         selectDropdown.add(option);
