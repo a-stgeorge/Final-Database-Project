@@ -5,8 +5,8 @@ window.onload = () => {
     document.getElementById('unassignedCourses').onclick = unassignedCourses;
     document.getElementById('assignedTimes').onclick = assignedTimes;
     document.getElementById('instructorTimes').onclick = instructorTimes;
-    courseOfferingsDropDown().then(() => courseOfferingOnChange());
-    timeslotDropDown().then(() => timeslotOnChange());
+    courseOfferingsDropDown();
+    timeslotDropDown();
 }
 
 //TODO make sure triggers catch what they are supposed to!!!

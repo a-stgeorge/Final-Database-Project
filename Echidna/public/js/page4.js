@@ -9,8 +9,8 @@ window.onload = () => {
     document.getElementById('targetLoads').onclick = targetLoads;
     document.getElementById('clearReport').onclick = clearReport;
 
-    courseOfferingsDropDown().then(() => courseOfferingOnChange());
-    instructorDropdown().then(() => instructorOnChange());
+    courseOfferingsDropDown();
+    instructorDropdown();
 }
 
 function offeringsPerInstructor() {
