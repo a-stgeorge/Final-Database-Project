@@ -51,6 +51,12 @@ async function addCourseOffering() {
         teuValue = null;
     }
 
+    if (!document.getElementById('form').checkValidity()) {
+        document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) bordered red.';
+        clearResultDiv();
+        return;
+    }
+
     if (courseID === 'NIL000') {
         if (document.getElementById('nilDescription').value === '') {
             document.getElementById('result').innerHTML = 'For Non-Instructional Load you must specify a description';
@@ -262,6 +268,12 @@ async function deleteCourseOffering() {
 
     if (teuValue === '') {
         teuValue = null;
+    }
+
+    if (!document.getElementById('form').checkValidity()) {
+        document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) bordered red.';
+        clearResultDiv();
+        return;
     }
 
     if (courseID === 'NIL000') {
@@ -514,6 +526,7 @@ function courseOfferingsOnChange() {
     }
 
     document.getElementById('year').value = selectedCourseOffering.year;
+    document.getElementById('section_num').value = selectedCourseOffering.section_num;
 
     if (selectedCourseOffering.TEU_value === null) {
         document.getElementById('teu').value = '';
