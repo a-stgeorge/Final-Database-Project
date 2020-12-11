@@ -20,7 +20,8 @@
 
         <form id="form">
             <label for="course_id">Course ID:</label>
-            <input type="text" id="course_id" required><br/>
+            <input type="text" id="course_id" required>
+            <label for="course_id" id="num_credits">Credits:</label><br/>
 
             <label for="course_type">Course type:</label>
             <select id="course_type" required>
@@ -48,11 +49,7 @@
             <label for="section_num">Section number:</label>
             <input type="number" id="section_num" min="1" step="1" style="width: 100px;" value="1" required>
             <br/>
-            
-            <label for="num_credits">Number credits:</label>
-            <input type="number" id="num_credits" min="0" max="9.5" step="0.5" value="0" style="width: 100px;" required>
-            <br/>
-            
+
             <label for="teu">TEU value:</label>
             <input type="number" id="teu" min="0" step="0.1" max="99.5" style="width: 100px;" value="3.4">
             <br/>

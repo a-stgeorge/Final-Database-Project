@@ -75,7 +75,7 @@ async function createCluster() {
 async function getCourses() {
 
     let data = {
-        query: 'select course_id, title, dept_name, num_credits from course'
+        query: `select course_id, title, dept_name, num_credits from course where course_id != 'NIL000'`
     };
     return fetch('/action/page6',
         {

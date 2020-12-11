@@ -6,6 +6,7 @@ window.onload = () => {
     };
     document.getElementById('clearInput').onclick = clearInputs;
     document.getElementById('course_type').onchange = courseTypeOnChange;
+    document.getElementById('course_id').onchange = courseIdOnChange;
     coursesDropdown();
     courseOfferingsDropdown();
 }
@@ -15,15 +16,25 @@ function courseTypeOnChange() {
     if (courseType === '') {
         document.getElementById('course_id').value = 'NIL000';
         document.getElementById('course_id').readOnly = true;
-        document.getElementById('num_credits').value = 0;
-        document.getElementById('num_credits').readOnly = true;
         document.getElementById('nilDescriptionLabel').hidden = false;
         document.getElementById('nilDescription').hidden = false;
+        document.getElementById('num_credits').hidden = true;
     } else {
         document.getElementById('course_id').readOnly = false;
-        document.getElementById('num_credits').readOnly = false;
         document.getElementById('nilDescriptionLabel').hidden = true;
         document.getElementById('nilDescription').hidden = true;
+        document.getElementById('num_credits').hidden = false;
+        courseIdOnChange()
+    }
+}
+
+async function courseIdOnChange() {
+    let courseID = document.getElementById("course_id").value;
+    let credits = await getCreditsForCourse(courseID);
+    if (credits !== null) {
+        document.getElementById("num_credits").innerHTML = `Credits: ${credits}`;
+    } else {
+        document.getElementById("num_credits").innerHTML = `Course does not exist.`;
     }
 }
 
@@ -33,7 +44,6 @@ async function addCourseOffering() {
     let semester = document.getElementById('semester').value;
     let year = document.getElementById('year').value;
     let sectionNum = document.getElementById('section_num').value;
-    let numCredits = document.getElementById('num_credits').value;
 
     let teuValue = document.getElementById('teu').value;
 
@@ -51,15 +61,12 @@ async function addCourseOffering() {
     }
 
     if (await courseExists(courseID)) {
-        if (await courseAndCreditsMatch(courseID, numCredits)) {
-            document.getElementById('result').innerHTML = 'Number of credits for course \'' + courseID + '\' does not match course';
-            clearResultDiv();
-            return;
-        } else if (await primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum)) {
+        if (await primaryKeyCourseOfferingExists(courseID, courseType, semester, year, sectionNum)) {
             document.getElementById('result').innerHTML = 'Cannot add course offering, it already exists';
             clearResultDiv();
             return;
         } else {
+            let numCredits = await getCreditsForCourse(courseID); // Get credits from corresponding course;
             let data;
             if (teuValue === null) {
                 data = {
@@ -138,11 +145,10 @@ async function courseExists(courseID) {
     });
 }
 
-async function courseAndCreditsMatch(courseID, numCredits) {
+async function getCreditsForCourse(courseID) {
     let data = {
-        query: `select * from course where
-        course_id = '${courseID}'
-        and num_credits = '${numCredits}'`
+        query: `select num_credits from course where
+        course_id = '${courseID}'`
     };
     return fetch('/action/page3', {
         method: 'POST',
@@ -159,10 +165,11 @@ async function courseAndCreditsMatch(courseID, numCredits) {
             return;
         }
         let responseJson = await response.json();
-        if (responseJson.length === 1) {
-            return false;
+        if (responseJson.length > 0) {
+            return responseJson[0].num_credits;
+        } else {
+            return null;
         }
-        return true;
     });
 }
 
@@ -250,8 +257,8 @@ async function deleteCourseOffering() {
     let semester = document.getElementById('semester').value;
     let year = document.getElementById('year').value;
     let sectionNum = document.getElementById('section_num').value;
-    let numCredits = document.getElementById('num_credits').value;
     let teuValue = document.getElementById('teu').value;
+    let numCredits = await getCreditsForCourse(courseID); // Get credits from corresponding course;
 
     if (teuValue === '') {
         teuValue = null;
@@ -364,13 +371,13 @@ function coursesOnChange() {
         document.getElementById('nilDescriptionLabel').hidden = false;
         document.getElementById('nilDescription').hidden = false;
         document.getElementById('nilDescription').value = '';
-        document.getElementById('num_credits').readOnly = true;
+        document.getElementById('num_credits').hidden = true;
     } else {
         document.getElementById('nilDescriptionLabel').hidden = true;
         document.getElementById('nilDescription').hidden = true;
         document.getElementById('nilDescription').value = '';
         document.getElementById('course_type').selectedIndex = 0;
-        document.getElementById('num_credits').readOnly = false;
+        document.getElementById('num_credits').hidden = false;
     }
 
     let data;
@@ -406,10 +413,10 @@ function coursesOnChange() {
         }
         let responseJson = await response.json();
         document.getElementById('course_id').value = responseJson[0].course_id;
-        document.getElementById('num_credits').value = responseJson[0].num_credits;
         if (responseJson[0].course_id === 'NIL000') {
             document.getElementById('course_type').selectedIndex = 2;
         }
+        courseIdOnChange();
     });
 }
 
@@ -467,15 +474,17 @@ function courseOfferingsOnChange() {
         document.getElementById('nilDescriptionLabel').hidden = false;
         document.getElementById('nilDescription').hidden = false;
         document.getElementById('nilDescription').value = selectedCourseOffering.course_type;
-        document.getElementById('num_credits').readOnly = true;
+        document.getElementById('num_credits').hidden = true;
     } else {
         document.getElementById('nilDescriptionLabel').hidden = true;
         document.getElementById('nilDescription').hidden = true;
         document.getElementById('nilDescription').value = '';
-        document.getElementById('num_credits').readOnly = false;
+        document.getElementById('num_credits').hidden = false;
     }
 
     document.getElementById('course_id').value = selectedCourseOffering.course_id;
+    courseIdOnChange();
+    
     switch (selectedCourseOffering.course_type) {
         case 'InPerson':
             document.getElementById('course_type').selectedIndex = 0;
@@ -505,8 +514,6 @@ function courseOfferingsOnChange() {
     }
 
     document.getElementById('year').value = selectedCourseOffering.year;
-    document.getElementById('section_num').value = selectedCourseOffering.section_num;
-    document.getElementById('num_credits').value = selectedCourseOffering.num_credits;
 
     if (selectedCourseOffering.TEU_value === null) {
         document.getElementById('teu').value = '';
@@ -518,16 +525,16 @@ function courseOfferingsOnChange() {
 function clearInputs() {
     document.getElementById('course_id').readOnly = false;
     document.getElementById('course_id').value = '';
+    document.getElementById('num_credits').innerHTML = 'Credits:';
     document.getElementById('course_type').selectedIndex = 0;
     document.getElementById('semester').selectedIndex = 0;
     document.getElementById('year').value = 2020;
     document.getElementById('section_num').value = 1;
-    document.getElementById('num_credits').value = 0;
-    document.getElementById('num_credits').readOnly = false;
     document.getElementById('teu').value = 3.4;
     document.getElementById('nilDescriptionLabel').hidden = true;
     document.getElementById('nilDescription').hidden = true;
     document.getElementById('nilDescription').value = '';
+    document.getElementById('num_credits').hidden = false;
 }
 
 function clearResultDiv() {
