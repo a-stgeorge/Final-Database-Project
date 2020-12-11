@@ -68,11 +68,10 @@ async function createCluster(){
                 document.getElementById('result').innerHTML = 'Success!';
                 clearResultDiv();
             });
+            box.checked = false;
         }
     });
     localStorage['current_cluster_id'] = parseInt(localStorage['current_cluster_id']) + 1;
-    await getCourses();
-    createCheckboxes();
     await getCourseClusters();
 }
 
