@@ -36,7 +36,7 @@ async function addCourseOffering() {
     let numCredits = document.getElementById('num_credits').value;
 
     let teuValue = document.getElementById('teu').value;
-    
+
     if (teuValue === '') {
         teuValue = null;
     }

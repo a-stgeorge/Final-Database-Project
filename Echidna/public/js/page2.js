@@ -179,8 +179,8 @@ function populateCoursesDropdown(data) {
 function coursesOnChange() {
     document.getElementById('course_id').readOnly = true;
     let selectedcourse = JSON.parse(document.getElementById('coursesSelect').value);
-    
-    let data; 
+
+    let data;
     if (selectedcourse.dept_name === null) {
         data = {
             query: `select * from course where 
@@ -188,7 +188,7 @@ function coursesOnChange() {
             and title = '${selectedcourse.title}'
             and dept_name is NULL
             and num_credits = '${selectedcourse.num_credits}'`
-        }; 
+        };
     } else {
         data = {
             query: `select * from course where 

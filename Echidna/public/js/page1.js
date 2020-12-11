@@ -86,7 +86,7 @@ async function addInstructor() {
     let deptName = document.getElementById('dept').value;
     let loadMin = document.getElementById('load_min').value;
     let loadMax = document.getElementById('load_max').value;
-    
+
     if (!document.getElementById('form').checkValidity()) {
         document.getElementById('result').innerHTML = 'Bad data in form, offending field(s) bordered red.';
         clearResultDiv();
@@ -249,5 +249,5 @@ function instructorsOnChange() {
 function clearResultDiv() {
     setTimeout(function () {
         document.getElementById('result').innerHTML = '';
-    }, 7000);
+    }, 10000);
 }

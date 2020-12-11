@@ -9,8 +9,13 @@ window.onload = () => {
     timeslotDropDown();
 }
 
-//TODO make sure triggers catch what they are supposed to!!!
 function assign() {
+    if (document.getElementById('timeslotsSelect').length === 0
+        || document.getElementById('offeringsSelect').length === 0) {
+        document.getElementById('result').innerHTML = 'Error: Either time slot or course offering table is empty.';
+        clearResultDiv();
+        return;
+    }
     let selectedTimeSlot = JSON.parse(document.getElementById('timeslotsSelect').value);
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let data = {
@@ -51,6 +56,12 @@ function assign() {
 }
 
 function unassign() {
+    if (document.getElementById('timeslotsSelect').length === 0
+        || document.getElementById('offeringsSelect').length === 0) {
+        document.getElementById('result').innerHTML = 'Error: Either time slot or course offering table is empty.';
+        clearResultDiv();
+        return;
+    }
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let data = {
         query: `update teaches set
@@ -195,7 +206,7 @@ async function showMod(modName, modCredits) {
         let responseJson = await response.json();
         if (responseJson.length === 0) {
             document.getElementById('assignedTimeslot').innerHTML = 'None';
-            return;    
+            return;
         }
         document.getElementById('assignedTimeslot').innerHTML = `${responseJson[0].mod_name}${responseJson[0].mod_credits},
         ${responseJson[0].start_time} - ${responseJson[0].end_time}, ${responseJson[0].days_of_week}`;

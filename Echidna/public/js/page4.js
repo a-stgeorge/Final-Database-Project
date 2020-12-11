@@ -136,18 +136,18 @@ function loadHighOrLow(sumJson) {
         makeLoadTable();
         for (let i = 0; i < loadJson.length; i++) {
             if (sumJson[i].TEU_Value === null) {
-                addToLoadTable(sumJson[i].Instructor_ID, loadJson[i].first_name, 
+                addToLoadTable(sumJson[i].Instructor_ID, loadJson[i].first_name,
                     loadJson[i].last_name, 0.0, 'Too Low');
                 continue;
             }
-            
+
             if (sumJson[i].TEU_Value > loadJson[i].desired_load_max) {
-                addToLoadTable(sumJson[i].Instructor_ID, loadJson[i].first_name, 
+                addToLoadTable(sumJson[i].Instructor_ID, loadJson[i].first_name,
                     loadJson[i].last_name, sumJson[i].TEU_Value, 'Too High');
             }
-            
+
             if (sumJson[i].TEU_Value < loadJson[i].desired_load_min) {
-                addToLoadTable(sumJson[i].Instructor_ID, loadJson[i].first_name, 
+                addToLoadTable(sumJson[i].Instructor_ID, loadJson[i].first_name,
                     loadJson[i].last_name, sumJson[i].TEU_Value, 'Too Low');
             }
         }
@@ -158,19 +158,19 @@ function makeLoadTable() {
     let newTable = document.createElement('table');
     newTable.setAttribute('id', 'table');
     let headRow = newTable.insertRow(0);
-    
+
     let headCell0 = headRow.insertCell(0);
     headCell0.innerHTML = 'Instructor ID';
-    
+
     let headCell1 = headRow.insertCell(1);
     headCell1.innerHTML = 'First Name';
-    
+
     let headCell2 = headRow.insertCell(2);
     headCell2.innerHTML = 'Last Name';
-    
+
     let headCell3 = headRow.insertCell(3);
     headCell3.innerHTML = 'Current TEU Value Sum';
-    
+
     let headCell4 = headRow.insertCell(4);
     headCell4.innerHTML = 'Too High / Too Low';
     document.getElementById('report').appendChild(newTable);
@@ -179,7 +179,7 @@ function makeLoadTable() {
 function addToLoadTable(instructorID, firstName, lastName, loadSum, issue) {
     let rowLength = document.getElementById('table').rows.length;
     let newRow = document.getElementById('table').insertRow(rowLength);
-    
+
     let newCell0 = newRow.insertCell(0);
     newCell0.innerHTML = instructorID;
 
@@ -188,10 +188,10 @@ function addToLoadTable(instructorID, firstName, lastName, loadSum, issue) {
 
     let newCell2 = newRow.insertCell(2);
     newCell2.innerHTML = lastName;
-    
+
     let newCell3 = newRow.insertCell(3);
     newCell3.innerHTML = loadSum;
-    
+
     let newCell4 = newRow.insertCell(4);
     newCell4.innerHTML = issue;
 }
@@ -203,6 +203,12 @@ function refreshDropdowns() {
 
 function assign() {
     clearReport();
+    if (document.getElementById('offeringsSelect').length === 0
+        || document.getElementById('instructorsSelect').length === 0) {
+        document.getElementById('result').innerHTML = 'Error: Either course offering or instructor table is empty.';
+        clearResultDiv();
+        return;
+    }
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let selectedInstructor = document.getElementById('instructorsSelect').value;
 
@@ -233,6 +239,12 @@ function assign() {
 
 function unassign() {
     clearReport();
+    if (document.getElementById('offeringsSelect').length === 0
+        || document.getElementById('instructorsSelect').length === 0) {
+        document.getElementById('result').innerHTML = 'Error: Either course offering or instructor table is empty.';
+        clearResultDiv();
+        return;
+    }
     let selectedOffering = JSON.parse(document.getElementById('offeringsSelect').value);
     let selectedInstructor = document.getElementById('instructorsSelect').value;
 
@@ -453,7 +465,7 @@ function instructorOnChange() {
 function clearResultDiv() {
     setTimeout(function () {
         document.getElementById('result').innerHTML = '';
-    }, 7000);
+    }, 10000);
 }
 
 function clearReport() {
