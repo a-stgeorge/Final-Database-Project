@@ -299,7 +299,7 @@ function timeslotOnChange() {
 
 function unassignedCourses() {
     let data = {
-        query: `select * from teaches natural right join course_offering where mod_name is NULL`
+        query: `select * from teaches natural right join course_offering where mod_name is NULL and course_id != 'NIL000'`
     };
     fetch('/action/page5', {
         method: 'POST',
