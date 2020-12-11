@@ -24,7 +24,7 @@ insert into teaches values(10000006, 'NIL000', 'Coaching', 'fall', 2020, 1, null
 insert into teaches values(10000007, 'COS214', 'InPerson', 'fall', 2020, 1, 'D', 4);
 insert into teaches values(10000007, 'COS335', 'InPerson', 'fall', 2020, 2, 'G', 3);
 insert into teaches values(10000007, 'MAT222', 'InPerson', 'fall', 2020, 1, 'T', 3);
-insert into teaches values(10000007, 'COS301', 'InPerson', 'fall', 2020, 1, 'W', 4);
+insert into teaches values(10000007, 'COS301', 'InPerson', 'fall', 2020, 2, 'W', 4);
 insert into teaches values(10000008, 'MAT422', 'InPerson', 'fall', 2020, 1, 'B', 4);
 insert into teaches values(10000008, 'MAT422', 'InPerson', 'fall', 2020, 2, 'C', 4);
 insert into teaches values(10000008, 'COS313', 'InPerson', 'fall', 2020, 1, 'E', 3);
