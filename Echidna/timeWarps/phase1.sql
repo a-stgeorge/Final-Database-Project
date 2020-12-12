@@ -191,7 +191,7 @@ end ;
 											       
 create trigger add_teaches_faulty_mod after insert on teaches
 for each row BEGIN
-    if(((select num_credits from course where course_id = NEW.course_id) = 4) and (NEW.mod_credits = 3) and (NEW.mod_name is not null) and (NEW.mod_name != 'OL'))
+    if(((select num_credits from course where course_id = NEW.course_id) = 4) and (NEW.mod_credits = 3) and (NEW.mod_name is not null) and (NEW.mod_name != 'OL') and (NEW.semester != 'Interim'))
     then
         signal sqlstate value '45000' set message_text = "Can't assign a 4 credit course to a 3 credit mod!";
     end if;
@@ -200,7 +200,7 @@ end;
 																 
 create trigger update_teaches_faulty_mod after update on teaches
 for each row BEGIN
-    if(((select num_credits from course where course_id = NEW.course_id) = 4) and (NEW.mod_credits = 3) and (NEW.mod_name is not null) and (NEW.mod_name != 'OL'))
+    if(((select num_credits from course where course_id = NEW.course_id) = 4) and (NEW.mod_credits = 3) and (NEW.mod_name is not null) and (NEW.mod_name != 'OL') and (NEW.semester != 'Interim'))
     then
         signal sqlstate value '45000' set message_text = "Can't assign a 4 credit course to a 3 credit mod!";
     end if;
