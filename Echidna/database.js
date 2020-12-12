@@ -16,8 +16,7 @@ module.exports = {
             host: 'localhost',
             user: text[0],
             password: text[1],
-            //TODO change this to final project database when ready
-            database: text[0],
+            database: 'echidna',
             port: 3306,
             multipleStatements: true
         });

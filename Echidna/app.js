@@ -16,9 +16,6 @@ app.get('/', async function (req, res) {
     res.sendFile(path.join(__dirname + '/public/html/mainPage.html'));
 });
 
-/** TODO LIST:
- * - In database.js remember to use the 'Echidna' database when ready!
- */
 
 const server = app.listen(port, function () {
     console.log('Server running on port 3000');
