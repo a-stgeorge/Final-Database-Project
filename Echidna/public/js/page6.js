@@ -45,11 +45,13 @@ async function createCluster() {
         clearResultDiv();
         return;
     }
+
+    document.getElementById('create_cluster').disabled = true;
     for (let i = 0; i < selectedBoxes.length; i++) {
         let data = {
             query: `insert into cluster values(${localStorage['current_cluster_id']}, '${selectedBoxes[i].value}')`
         };
-        fetch('/action/page6',
+        await fetch('/action/page6',
             {
                 method: 'POST',
                 headers: {
@@ -68,6 +70,7 @@ async function createCluster() {
             });
         selectedBoxes[i].checked = false;
     }
+    document.getElementById('create_cluster').disabled = false;
     localStorage['current_cluster_id'] = parseInt(localStorage['current_cluster_id']) + 1;
     await getCourseClusters();
 }
