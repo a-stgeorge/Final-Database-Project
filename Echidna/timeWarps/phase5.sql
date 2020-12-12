@@ -84,3 +84,7 @@ insert into teaches values(10000010, 'MAT209', 'InPerson', 'spring', 2021, 1, 'A
 insert into teaches values(10000010, 'MAT222', 'InPerson', 'spring', 2021, 2, 'C', 3);
 insert into teaches values(10000010, 'COS216', 'InPerson', 'spring', 2021, 2, 'G', 3);
 insert into teaches values(10000010, 'MAT125', 'InPerson', 'spring', 2021, 2, 'M', 3);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'fall', 2020, 2, null, null);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'fall', 2020, 3, null, null);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'spring', 2021, 2, null, null);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'spring', 2021, 3, null, null);

@@ -24,7 +24,7 @@ insert into teaches values(10000006, 'NIL000', 'Coaching', 'fall', 2020, 1, null
 insert into teaches values(10000007, 'COS214', 'InPerson', 'fall', 2020, 1, NULL, NULL);
 insert into teaches values(10000007, 'COS335', 'InPerson', 'fall', 2020, 2, NULL, NULL);
 insert into teaches values(10000007, 'MAT222', 'InPerson', 'fall', 2020, 1, NULL, NULL);
-insert into teaches values(10000007, 'COS301', 'InPerson', 'fall', 2020, 1, NULL, NULL);
+insert into teaches values(10000007, 'COS301', 'InPerson', 'fall', 2020, 2, NULL, NULL);
 insert into teaches values(10000008, 'MAT422', 'InPerson', 'fall', 2020, 1, NULL, NULL);
 insert into teaches values(10000008, 'MAT422', 'InPerson', 'fall', 2020, 2, NULL, NULL);
 insert into teaches values(10000008, 'COS313', 'InPerson', 'fall', 2020, 1, NULL, NULL);
@@ -84,3 +84,7 @@ insert into teaches values(10000010, 'MAT209', 'InPerson', 'spring', 2021, 1, NU
 insert into teaches values(10000010, 'MAT222', 'InPerson', 'spring', 2021, 2, NULL, NULL);
 insert into teaches values(10000010, 'COS216', 'InPerson', 'spring', 2021, 2, NULL, NULL);
 insert into teaches values(10000010, 'MAT125', 'InPerson', 'spring', 2021, 2, NULL, NULL);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'fall', 2020, 2, null, null);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'fall', 2020, 3, null, null);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'spring', 2021, 2, null, null);
+insert into teaches values(10000011, 'NIL000', 'Administrative', 'spring', 2021, 3, null, null);

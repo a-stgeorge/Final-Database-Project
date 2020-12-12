@@ -10,6 +10,7 @@ insert into instructor values(10000007, 'Kirk', 'Cousins', 'kcousins@college.edu
 insert into instructor values(10000008, 'Xin', 'HuaShi', 'xhuashi@college.edu', 'MathCs', 23.5, 23.8);
 insert into instructor values(10000009, 'Rafael', 'Nadal', 'rdadal@college.edu', 'MathCs', 23.5, 23.8);
 insert into instructor values(10000010, 'Sally', 'Smith', 'ssmith@college.edu', 'MathCs', 23.5, 23.8);
+insert into instructor values(10000011, 'NIL', 'Instructor', 'noclasses@college.edu', 'MathCs', 23.5, 23.8);
 
 /* COURSES */
 
