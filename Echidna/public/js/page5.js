@@ -5,6 +5,7 @@ window.onload = () => {
     document.getElementById('unassignedCourses').onclick = unassignedCourses;
     document.getElementById('assignedTimes').onclick = assignedTimes;
     document.getElementById('instructorTimes').onclick = instructorTimes;
+    document.getElementById('clusterConflict').onclick = clusterConflict;
     courseOfferingsDropDown().then(() => courseOfferingOnChange());
     timeslotDropDown().then(() => timeslotOnChange());
 }
@@ -363,6 +364,36 @@ function instructorTimes() {
         from teaches join instructor using (instructor_id) 
         join mod_table using (mod_name, mod_credits)
         order by instructor_id`
+    };
+    fetch('/action/page5', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    ).then(async response => {
+        if (!response.ok) {
+            let responseMessage = await response.text();
+            document.getElementById('result').innerHTML = responseMessage;
+            clearResultDiv();
+            return;
+        }
+        let responseJson = await response.json();
+        document.getElementById('report').innerHTML = ''
+        constructTable('#report', responseJson);
+    });
+}
+
+function clusterConflict() {
+    let data = {
+        query: `select conflicts.* from 
+        (select * from teaches natural join cluster) as conflicts join 
+        (select semester, year, mod_name, cluster_id, count(*) as num_duplicates from teaches 
+        natural join cluster group by semester, year, mod_name, cluster_id having num_duplicates > 1) 
+        sum_conflicts on conflicts.semester = sum_conflicts.semester and conflicts.year = sum_conflicts.year 
+        and conflicts.mod_name = sum_conflicts.mod_name and conflicts.cluster_id = sum_conflicts.cluster_id 
+        order by mod_name, cluster_id, semester`
     };
     fetch('/action/page5', {
         method: 'POST',
